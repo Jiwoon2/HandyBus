@@ -1,8 +1,10 @@
 package org.fourworld.handybus;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter_BusStop extends RecyclerView.Adapter<RecyclerAdapter_BusStop.ViewHolder> {
     static ArrayList<RecylcerItem_BusStop> items = new ArrayList<>();
+    Intent intent;
 
     RecyclerAdapter_BusStop(ArrayList<RecylcerItem_BusStop> items){this.items = items;}
 
@@ -34,8 +37,15 @@ public class RecyclerAdapter_BusStop extends RecyclerView.Adapter<RecyclerAdapte
         holder.bus_id.setText(item.busStID);
         holder.bus_nm.setText(item.busStName);
 
-        //상세페이지연결
-
+        //버스 목록 페이지 연결
+        holder.busStop_container.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(v.getContext(), BusList.class);
+                intent.putExtra("busStID", item.busStID); //정류소 id 넘겨줌
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -48,11 +58,13 @@ public class RecyclerAdapter_BusStop extends RecyclerView.Adapter<RecyclerAdapte
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView bus_id;
         TextView bus_nm;
+        LinearLayout busStop_container;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             bus_id = itemView.findViewById(R.id.busStID);
             bus_nm = itemView.findViewById(R.id.busStName);
+            busStop_container= itemView.findViewById(R.id.item_busStop);
         }
 
 

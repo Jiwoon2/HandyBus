@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
         button = v.findViewById(R.id.button);
 
         mAdapter = new RecyclerAdapter_BusStop(mList);
-        mRecyclerView = v.findViewById(R.id.recycler1);
+        mRecyclerView = v.findViewById(R.id.container_busStop);
 
         mRecyclerView.setAdapter(mAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(v.getContext(), LinearLayoutManager.VERTICAL, false);
