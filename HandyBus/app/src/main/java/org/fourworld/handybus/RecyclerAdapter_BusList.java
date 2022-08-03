@@ -1,8 +1,10 @@
 package org.fourworld.handybus;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class RecyclerAdapter_BusList extends RecyclerView.Adapter<RecyclerAdapter_BusList.ViewHolder>{
+    Intent intent;
     ArrayList<RecyclerItem_BusList> items = new ArrayList<>();
 
     RecyclerAdapter_BusList(ArrayList<RecyclerItem_BusList>items){this.items = items;}
@@ -25,7 +28,7 @@ public class RecyclerAdapter_BusList extends RecyclerView.Adapter<RecyclerAdapte
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.recycleritem_buslist, parent, false);
-        return new ViewHolder(itemView);
+        return new RecyclerAdapter_BusList.ViewHolder(itemView);
     }
 
     @Override
@@ -43,6 +46,17 @@ public class RecyclerAdapter_BusList extends RecyclerView.Adapter<RecyclerAdapte
         holder.busNum.setText(item.busNum);
         holder.arrmsg1.setText(item.busArrmsg1);
         holder.arrmsg2.setText(item.busArrmsg2);
+
+        //버스 운영정보 페이지 연결
+        holder.busList_container.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(v.getContext(),BusInfo.class);
+                intent.putExtra("busRouteId",item.busRouteId);
+                v.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -55,6 +69,7 @@ public class RecyclerAdapter_BusList extends RecyclerView.Adapter<RecyclerAdapte
         TextView busNum;
         TextView arrmsg1;
         TextView arrmsg2;
+        LinearLayout busList_container;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -63,6 +78,7 @@ public class RecyclerAdapter_BusList extends RecyclerView.Adapter<RecyclerAdapte
             busNum = itemView.findViewById(R.id.busNum);
             arrmsg1= itemView.findViewById(R.id.arrmsg1);
             arrmsg2= itemView.findViewById(R.id.arrmsg2);
+            busList_container= itemView.findViewById(R.id.item_busList);
 
         }
     }

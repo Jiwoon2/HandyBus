@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.HandyBus">
+        <activity android:name=".BusInfo"></activity>
         <activity android:name=".BusList"></activity>
         <activity
             android:name=".MainActivity"

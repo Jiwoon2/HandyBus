@@ -1,14 +1,12 @@
 package org.fourworld.handybus;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,61 +21,60 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.StringReader;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BusList extends AppCompatActivity {
-
+public class BusInfo extends AppCompatActivity {
     String key="LGXl5bldirXE69OTG08x3xUC%2F90KSnwDlSqI6ZEtNMZNnCLMHgjDTRX1iUdqFmf7%2BOZf2esBogmwqYVV%2B8a40g%3D%3D";
 
     Intent intent;
-    String busStID;
-    String busRouteId;
-    String busRouteType;
-    String busNum;
-    String busArrmsg1;
-    String busArrmsg2;
+    String busRouteId;//노선ID
+    String busRouteNm;//노선명
+    String stStationNm; //기점
+    String edStationNm; //종점
+    String firstBusTm; //첫차 -> 저상버스는 정보 안나오거나 19년도에서 멈춘 정보많아서 일반버스로 함
+    String lastBusTm; //막차
+    String term; //배차 간격(일반버스 기준)
 
-    RecyclerView mRecyclerView = null ;
-    RecyclerAdapter_BusList mAdapter = null ;
-    ArrayList<RecyclerItem_BusList> mList = new ArrayList<>();
+    TextView tv_busRouteNm;
+    TextView tv_stStationNm;
+    TextView tv_edStationNm;
+    TextView tv_firstBusTm;
+    TextView tv_lastBusTm;
+    TextView tv_term;
 
     static RequestQueue requestQueue;
-    String TAG = "BUS LIST";
+    String TAG = "BUS INFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bus_list);
+        setContentView(R.layout.activity_bus_info);
 
-        intent= getIntent();
-        busStID= intent.getStringExtra("busStID"); //정류소 id 넘겨받음
+        tv_busRouteNm=findViewById(R.id.tv_busRouteNm);
+        tv_stStationNm=findViewById(R.id.tv_stStationNm);
+        tv_edStationNm=findViewById(R.id.tv_edStationNm);
+        tv_firstBusTm=findViewById(R.id.tv_firstBusTm);
+        tv_lastBusTm=findViewById(R.id.tv_lastBusTm);
+        tv_term=findViewById(R.id.tv_term);
 
-        mAdapter = new RecyclerAdapter_BusList(mList);
-        mRecyclerView = this.findViewById(R.id.container_busList);
-
-        mRecyclerView.setAdapter(mAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
+        intent=getIntent();
+        busRouteId=intent.getStringExtra("busRouteId");
 
         requestQueue = Volley.newRequestQueue(this);
 
         StringBuffer buffer=new StringBuffer();
-        String location = URLEncoder.encode(busStID);//검색어
+        String location = URLEncoder.encode(busRouteId);//검색어
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,
-                "http://ws.bus.go.kr/api/rest/arrive/getLowArrInfoByStId?ServiceKey="+key+"&stId="+location,
+                "http://ws.bus.go.kr/api/rest/busRouteInfo/getRouteInfo?ServiceKey="+key+"&busRouteId="+location,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, "onResponse : " + response); //xml 다 가져옴
-
                         String curr_tag = "";
-                        RecyclerItem_BusList bus = new RecyclerItem_BusList();
-                        mAdapter.clearItems();
-
+//System.out.println(location+"%%%%%");
                         try {
                             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                             factory.setNamespaceAware(true);
@@ -92,49 +89,41 @@ public class BusList extends AppCompatActivity {
                                     //시작하는 tag 기억
                                     curr_tag = xpp.getName();
                                     if (xpp.getName().equals("item")) {
-                                        bus = new RecyclerItem_BusList();
                                     }
                                 } else if (eventType == XmlPullParser.END_TAG) {
                                     //itemList 태그 종료시 추가
                                     if (xpp.getName().equals("itemList")) {
-                                        if (bus.checkRecvAllData()) {
 
-                                        }
-                                        addItem(busRouteId, busRouteType,busNum, busArrmsg1,busArrmsg2 ); //버스정류소 추가
                                     }
                                     curr_tag = "";
                                 } else if (eventType == XmlPullParser.TEXT) {
                                     //태그 종류별로 기록
                                     switch (curr_tag) {
-                                        case "rtNm": //노선명
-                                            bus.busNum = xpp.getText();
-                                            busNum=xpp.getText();
+                                        case "busRouteNm": //노선명
+                                            busRouteNm=xpp.getText();
+                                            tv_busRouteNm.setText(busRouteNm);
                                             break;
-                                        case "busRouteId": //노선ID
-                                            bus.busRouteId = xpp.getText();
-                                            busRouteId=xpp.getText();
+                                        case "stStationNm":
+                                            stStationNm=xpp.getText();
+                                            tv_stStationNm.setText(stStationNm);
                                             break;
-                                        case "routeType"://노선 유형
-                                            bus.busRouteType = xpp.getText();
-                                            busRouteType=xpp.getText();
+                                        case "edStationNm":
+                                            edStationNm=xpp.getText();
+                                            tv_edStationNm.setText(edStationNm);
                                             break;
-                                        case "arrmsg1": //도착 버스1
-                                            bus.busArrmsg1 = xpp.getText();
-                                            busArrmsg1=xpp.getText();
+                                        case "firstBusTm":
+                                            firstBusTm=xpp.getText();
+                                            //시간 환산 필요
+                                            tv_firstBusTm.setText(firstBusTm);
                                             break;
-                                        case "arrmsg2":  //도착 버스2
-                                            bus.busArrmsg2 = xpp.getText();
-                                            busArrmsg2=xpp.getText();
+                                        case "lastBusTm":
+                                            lastBusTm=xpp.getText();
+                                            tv_lastBusTm.setText(lastBusTm);
                                             break;
-//                                                case "stoptype":
-//                                                    station.stoptype = xpp.getText();
-//                                                    break;
-
-//                                            case "stId": //정류소 id
-//                                                bus.busStID = xpp.getText(); //이 코드 없으면 오류남
-//                                                busStID=xpp.getText();
-//                                                break;
-
+                                        case "term": //분
+                                            term=xpp.getText();
+                                            tv_term.setText(term);
+                                            break;
                                     }
                                 }
                                 eventType = xpp.next();
@@ -144,9 +133,6 @@ public class BusList extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                        mAdapter.notifyDataSetChanged();
-
                     }
 
                 },
@@ -172,17 +158,5 @@ public class BusList extends AppCompatActivity {
         requestQueue.add(request);
 
 
-    }
-
-    public void addItem(String busRouteId, String busRouteType, String busNum,String busArrmsg1,String busArrmsg2) {
-        RecyclerItem_BusList item = new RecyclerItem_BusList();
-
-        item. setBusRouteId(busRouteId);
-        item.setBusRouteType(busRouteType);
-        item.setBusNum(busNum);
-        item.setBusArrmsg1(busArrmsg1);
-        item.setBusArrmsg2(busArrmsg2);
-
-        mList.add(item);
     }
 }
