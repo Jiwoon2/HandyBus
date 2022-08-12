@@ -35,14 +35,32 @@ public class RecyclerAdapter_BusList extends RecyclerView.Adapter<RecyclerAdapte
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
         RecyclerItem_BusList item =items.get(position);
 
-        String type;
-        //if문으로 구별해서 한글로 넣기
+        String type="";
         //(1:공항, 2:마을, 3:간선, 4:지선, 5:순환, 6:광역, 7:인천, 8:경기, 9:폐지, 0:공용)
-        if(item.busRouteType.equals(0)){
-
+        if(item.busRouteType.equals("1")){
+            type="공항";
+        }else if(item.busRouteType.equals("2")){
+            type="마을";
+        }else if(item.busRouteType.equals("3")){
+            type="간선";
+        }else if(item.busRouteType.equals("4")){
+            type="지선";
+        }else if(item.busRouteType.equals("5")){
+            type="순환";
+        }else if(item.busRouteType.equals("6")){
+            type="광역";
+        }else if(item.busRouteType.equals("7")){
+            type="인천";
+        }else if(item.busRouteType.equals("8")){
+            type="경기";
+        }else if(item.busRouteType.equals("9")){
+            type="폐지";
+        }
+        else{
+            type="공용";
         }
 
-        holder.routeType.setText(item.busRouteType);
+        holder.routeType.setText(type);
         holder.busNum.setText(item.busNum);
         holder.arrmsg1.setText(item.busArrmsg1);
         holder.arrmsg2.setText(item.busArrmsg2);

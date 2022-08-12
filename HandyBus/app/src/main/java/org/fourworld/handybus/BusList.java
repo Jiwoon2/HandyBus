@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ import java.util.Map;
 
 public class BusList extends AppCompatActivity {
 
+    public static Activity BusListActivity;
+
     String key="LGXl5bldirXE69OTG08x3xUC%2F90KSnwDlSqI6ZEtNMZNnCLMHgjDTRX1iUdqFmf7%2BOZf2esBogmwqYVV%2B8a40g%3D%3D";
 
     Intent intent;
@@ -50,6 +53,8 @@ public class BusList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_list);
+
+        BusListActivity=BusList.this;
 
         intent= getIntent();
         busStID= intent.getStringExtra("busStID"); //정류소 id 넘겨받음

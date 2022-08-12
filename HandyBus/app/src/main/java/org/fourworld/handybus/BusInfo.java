@@ -1,12 +1,16 @@
 package org.fourworld.handybus;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -42,6 +46,7 @@ public class BusInfo extends AppCompatActivity {
     TextView tv_firstBusTm;
     TextView tv_lastBusTm;
     TextView tv_term;
+    Button booking_btn;
 
     static RequestQueue requestQueue;
     String TAG = "BUS INFO";
@@ -57,9 +62,27 @@ public class BusInfo extends AppCompatActivity {
         tv_firstBusTm=findViewById(R.id.tv_firstBusTm);
         tv_lastBusTm=findViewById(R.id.tv_lastBusTm);
         tv_term=findViewById(R.id.tv_term);
+        booking_btn=findViewById(R.id.booking_btn);
 
         intent=getIntent();
         busRouteId=intent.getStringExtra("busRouteId");
+
+
+        BusList BusListActivity= (BusList) BusList.BusListActivity;
+
+        booking_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //버스 예약 프래그먼트로 이동
+                BusListActivity.finish();
+                finish();
+
+                intent= new Intent(v.getContext(), BusReservationActivity.class);
+                intent.putExtra("busRouteNm",busRouteNm); //노선명 전달
+                v.getContext().startActivity(intent);}
+        });
+
+
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -113,16 +136,20 @@ public class BusInfo extends AppCompatActivity {
                                             break;
                                         case "firstBusTm":
                                             firstBusTm=xpp.getText();
-                                            //시간 환산 필요
-                                            tv_firstBusTm.setText(firstBusTm);
+                                            //시간 환산 필요 14자리중 뒤에 6자리
+                                            String fh=firstBusTm.substring(8,10);//시간
+                                            String fm=firstBusTm.substring(10,12);//분
+                                            tv_firstBusTm.setText(fh+":"+fm);
                                             break;
                                         case "lastBusTm":
                                             lastBusTm=xpp.getText();
-                                            tv_lastBusTm.setText(lastBusTm);
+                                            String lh=lastBusTm.substring(8,10);//시간
+                                            String lm=lastBusTm.substring(10,12);//분
+                                            tv_lastBusTm.setText(lh+":"+lm);
                                             break;
                                         case "term": //분
                                             term=xpp.getText();
-                                            tv_term.setText(term);
+                                            tv_term.setText(term+"분");
                                             break;
                                     }
                                 }

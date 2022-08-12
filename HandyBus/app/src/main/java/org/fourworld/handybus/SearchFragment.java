@@ -1,5 +1,6 @@
 package org.fourworld.handybus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +42,7 @@ public class SearchFragment extends Fragment {
     View v;
 
     EditText edit;
-    Button button;
+    ImageButton button;
 
     //정류소 정보 조회
     String key="LGXl5bldirXE69OTG08x3xUC%2F90KSnwDlSqI6ZEtNMZNnCLMHgjDTRX1iUdqFmf7%2BOZf2esBogmwqYVV%2B8a40g%3D%3D" ;
@@ -53,6 +56,8 @@ public class SearchFragment extends Fragment {
     static RequestQueue requestQueue;
     String TAG = "BUSSTOP LIST";
 
+    String busRouteNm="";
+    Intent intent;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -179,6 +184,19 @@ public class SearchFragment extends Fragment {
                 requestQueue.add(request);
             }
         });
+
+//        intent= getIntent();
+//        busRouteNm= intent.getStringExtra("busRouteNm"); //노선명 넘겨받음
+//        BusReservationFragment = new BusReservationFragment();
+//
+//        if(busRouteNm!=""){//근데 계속 있음..망할..
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.content_layout, BusReservationFragment).commit();
+//
+//        }
+
+
+
 
 
         return v;

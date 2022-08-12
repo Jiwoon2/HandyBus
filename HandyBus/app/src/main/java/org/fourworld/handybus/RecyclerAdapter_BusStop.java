@@ -1,9 +1,11 @@
 package org.fourworld.handybus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,10 +26,10 @@ public class RecyclerAdapter_BusStop extends RecyclerView.Adapter<RecyclerAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerAdapter_BusStop.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.recycleritem_busstop, parent, false);
-        return new ViewHolder(itemView);
+        return new RecyclerAdapter_BusStop.ViewHolder(itemView);
     }
 
     @Override
@@ -46,6 +48,8 @@ public class RecyclerAdapter_BusStop extends RecyclerView.Adapter<RecyclerAdapte
                 v.getContext().startActivity(intent);
             }
         });
+
+
     }
 
     @Override
