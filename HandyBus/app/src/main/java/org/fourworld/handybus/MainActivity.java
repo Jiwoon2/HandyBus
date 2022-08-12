@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                                 homeFragment.tv_departStation.setText(intent.getStringExtra("et_departures"));
                                 homeFragment.tv_arrStation.setText(intent.getStringExtra("et_arrivals"));
                                 homeFragment.tv_personNm.setText(intent.getStringExtra("radio_type")+" "+intent.getStringExtra("et_num")+"명");
-                                homeFragment.tv_help.setText(intent.getStringExtra("radio_wheel")+" "+intent.getStringExtra("et_help"));
+                                homeFragment.tv_help.setText(intent.getStringExtra("radio_wheel")+", "+intent.getStringExtra("et_help"));
                                 homeFragment.tv_getonBusNm.setText(intent.getStringExtra("res_busNum"));
 
                                 if(homeFragment.tv_departStation.getText()!=""){

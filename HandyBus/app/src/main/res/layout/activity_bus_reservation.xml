@@ -67,12 +67,15 @@
         android:layout_height="0dp"
         android:layout_weight="9"
         android:weightSum="12"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             android:weightSum="12"
             android:orientation="horizontal">
 
@@ -84,87 +87,93 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/leftradius"
-                android:layout_weight="1"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="10"
+                android:gravity="center"
                 android:background="@drawable/arrowview">
 
                 <EditText
+                    android:layout_marginLeft="15dp"
                     android:id="@+id/et_departures"
-                    android:layout_weight="3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="4"
                     android:hint="출발지"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="2"
+                    android:layout_height="match_parent"/>
 
                 <EditText
+                    android:layout_marginRight="15dp"
+                    android:gravity="center"
                     android:id="@+id/et_arrivals"
-                    android:layout_weight="3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
                     android:layout_height="wrap_content"
                     android:hint="도착지"/>
 
             </LinearLayout>
 
-
-
-<!--            <ImageView-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="2"-->
-<!--                android:src=""-->
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/rightradius"
-                android:layout_weight="0.5"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
+
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="#CCCCCC"/>
+
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="노선 "/>
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="5dp"
+                android:text="노선 번호 "/>
 
             <TextView
                 android:id="@+id/res_busNum"
+                android:textSize="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="번호 "/>
+                android:text=""/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="10dp"
                 android:text="탑승자 정보 "/>
 
             <RadioGroup
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <RadioButton  android:id="@+id/radio_adult"
@@ -186,26 +195,34 @@
 
             <EditText
                 android:id="@+id/et_num"
-                android:layout_width="wrap_content"
+                android:layout_width="74dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:gravity="center"
-                android:hint="인원 수"/>
+                android:hint="인원 수"
+                android:layout_marginLeft="5dp"
+                android:textSize="15dp"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="10dp"
                 android:text="휠체어 소지 여부"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <RadioButton android:id="@+id/radio_nonWheel"
@@ -224,26 +241,51 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="5dp"
                 android:text="도움 요청 사항 "/>
             <EditText
                 android:id="@+id/et_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="15dp"
                 android:hint="작성해 주세요"/>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/confirm_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="예약하기"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/confirm_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/reserbtn"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:text="예약하기" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5.5"/>
 
     </LinearLayout>
 
