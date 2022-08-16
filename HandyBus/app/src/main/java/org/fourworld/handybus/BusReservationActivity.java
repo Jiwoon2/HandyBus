@@ -1,22 +1,32 @@
 package org.fourworld.handybus;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BusReservationActivity extends AppCompatActivity {
 
+    static String eeeee;
+
     Intent intent;
     String busRouteNm;
     TextView res_busNum;
-    EditText et_departures;
-    EditText et_arrivals;
+    //AutoCompleteTextView et_departures;
+    TextView et_departures;
+    //AutoCompleteTextView et_arrivals;
+    TextView et_arrivals;
     EditText et_num;
     EditText et_help;
 
@@ -100,6 +110,71 @@ public class BusReservationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        et_departures.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String [] list={"서울여자대학교", "화랑대 사거리", "화랑대역 4번 출구", "태릉입구역"};
+//                intent=new Intent(v.getContext(), BusStopList.class);
+//                startActivityForResult(intent,0);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(BusReservationActivity.this);
+                dlg.setTitle("출발지 선택");
+                //dlg.setIcon(R.drawable.internet);
+                dlg.setItems(list, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // array[which] = "클릭한 값"
+                        et_departures.setText(list[which]);
+                        //Toast.makeText(getApplicationContext(), list[which],Toast.LENGTH_LONG).show();
+                    }
+                });
+                dlg.show();
+            }
+        });
+
+        et_arrivals.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String [] list={"서울여자대학교", "화랑대 사거리", "화랑대역 4번 출구", "태릉입구역"};
+//                intent=new Intent(v.getContext(), BusStopList.class);
+//                startActivityForResult(intent,0);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(BusReservationActivity.this);
+                dlg.setTitle("도착지 선택");
+                //dlg.setIcon(R.drawable.internet);
+                dlg.setItems(list, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // array[which] = "클릭한 값"
+                        et_arrivals.setText(list[which]);
+                        //Toast.makeText(getApplicationContext(), list[which],Toast.LENGTH_LONG).show();
+                    }
+                });
+                dlg.show();
+            }
+        });
+
+
+
+//        String [] list={"서울여자대학교", "화랑대 사거리", "화랑대역 4번 출구", "태릉입구역"};
+//        AutoCompleteTextView deEdit=findViewById(R.id.et_departures);
+//        AutoCompleteTextView arrEdit=findViewById(R.id.et_arrivals);
+//
+//        deEdit.setAdapter(new ArrayAdapter<String>(this,
+//                android.R.layout.simple_dropdown_item_1line, list));
+//        arrEdit.setAdapter(new ArrayAdapter<String>(this,
+//                android.R.layout.simple_dropdown_item_1line, list));
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            case 0:
+                et_departures.setText(data.getStringExtra("출발지"));
+                break;
+
+        }
 
 
     }
