@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HandyBus">
+        <activity android:name=".Direction.tmp_direction"></activity>
         <activity android:name=".SignUp.SignUpActivity"></activity>
         <activity android:name=".Common.FrameActivity"></activity>
         <activity
