@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="11"
-    tools:context=".BusReservationActivity">
+    tools:context=".activity.ReserveActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +20,7 @@
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:paddingLeft="10dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/mainmenu"/>
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -32,8 +31,7 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
-            android:layout_weight="2"
-            android:src="@drawable/mainlogo"/>
+            android:layout_weight="2"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -45,8 +43,7 @@
             android:layout_weight="1.5"
             android:layout_height="match_parent"
             android:paddingRight="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/mainname"/>
+            android:scaleType="fitCenter"/>
     </LinearLayout>
 
     <LinearLayout
@@ -57,8 +54,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"
-            android:src="@drawable/lowbusres"/>
+            android:scaleType="centerInside"/>
     </LinearLayout>
 
 
@@ -88,8 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:gravity="center"
-                android:background="@drawable/arrowview">
+                android:gravity="center">
 
                 <TextView
                     android:layout_marginLeft="15dp"
