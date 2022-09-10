@@ -1,209 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="9"
-    tools:context=".BusInfo">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="busRouteInfo"
+            type="com.khackathon.handybus.viewmodel.RouteInfoViewmodel" />
+
+        <variable
+            name="item"
+            type="com.khackathon.handybus.model.RouteInfo_Item" />
+
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1">
-
-        <Button
-            android:id="@+id/booking_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/reserbtn"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            android:text="예약하기" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_weight="4"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="9"
+        tools:context=".activity.BusInfo">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:layout_marginBottom="5dp"
-                android:text="노선 번호" />
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_busRouteNm"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/booking_btn"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textColor="#67B645"
-                android:textSize="15dp"
+                android:background="@drawable/reserbtn"
                 android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:text="" />
+                android:textSize="16dp"
+                android:text="예약하기"/>
+
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_weight="4"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:layout_marginBottom="5dp"
-                android:text="운행 정보" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-                <!--                <TextView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="기점" />-->
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/tv_stStationNm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="" />
-
-                <TextView
-                    android:gravity="center"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:text=" &lt; - &gt; " />
-
-                <!--                <TextView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="종점" />-->
+                    android:layout_marginBottom="5dp"
+                    android:text="노선 번호" />
 
                 <TextView
-                    android:id="@+id/tv_edStationNm"
+                    android:id="@+id/tv_busRouteNm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#67B645"
                     android:textSize="15dp"
-                    android:text="" />
-
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:text="@{item.busRouteNm}" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="5dp"
+                    android:text="운행 정보" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
+                    <!--                <TextView-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:text="기점" />-->
 
                     <TextView
+                        android:id="@+id/tv_stStationNm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="금일첫차시간"
+                        android:textSize="15dp"
+                        android:text="@{item.BusStStationNm}" />
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:text=" &lt; - &gt; " />
+
+                    <!--                <TextView-->
+                    <!--                    android:layout_width="wrap_content"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:text="종점" />-->
+
+                    <TextView
+                        android:id="@+id/tv_edStationNm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:text="@{item.busEdStationNm}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="금일첫차시간"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:id="@+id/tv_firstBusTm"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.busFirstBusTm}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="5dp"
-                        android:textColor="@color/black"/>
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="금일막차시간"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:id="@+id/tv_lastBusTm"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.busLastBusTm}" />
 
-                    <TextView
-                        android:id="@+id/tv_firstBusTm"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="" />
+                    </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="금일막차시간"
-                        android:textColor="@color/black"/>
-                    <TextView
-                        android:id="@+id/tv_lastBusTm"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#CCCCCC"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="5dp"
+                        android:background="#CCCCCC"/>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="배차간격"
-                        android:textColor="@color/black"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="배차간격"
+                            android:textColor="@color/black"/>
 
-                    <TextView
-                        android:id="@+id/tv_term"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="" />
+                        <TextView
+                            android:id="@+id/tv_term"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.busTerm}" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#CCCCCC"/>
+
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#CCCCCC"/>
-
 
             </LinearLayout>
+
 
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"/>
+
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"/>
-
-</LinearLayout>
+</layout>
