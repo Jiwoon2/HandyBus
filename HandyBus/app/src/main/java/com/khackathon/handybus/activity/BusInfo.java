@@ -8,14 +8,24 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.khackathon.handybus.R;
+import com.khackathon.handybus.adapter.BusListAdapter;
+import com.khackathon.handybus.adapter.StationRouteAdapter;
 import com.khackathon.handybus.databinding.ActivityBusInfoBinding;
+import com.khackathon.handybus.model.BusList_Item;
 import com.khackathon.handybus.model.RouteInfo_Item;
 import com.khackathon.handybus.model.RouteInfoRepository;
+import com.khackathon.handybus.model.StationRouteRepository;
+import com.khackathon.handybus.model.StationRoute_Item;
 import com.khackathon.handybus.viewmodel.RouteInfoViewmodel;
+import com.khackathon.handybus.viewmodel.StationRouteViewmodel;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Observer;
 
 public class BusInfo extends AppCompatActivity {
 
@@ -26,6 +36,11 @@ public class BusInfo extends AppCompatActivity {
 
     RouteInfoViewmodel routeInfoViewmodel;
     RouteInfo_Item item = new RouteInfo_Item();
+
+    RecyclerView mRecyclerView = null ;
+    StationRouteAdapter mAdapter = null ;
+    StationRouteViewmodel stationRouteViewmodel;
+    ArrayList<StationRoute_Item> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +73,6 @@ public class BusInfo extends AppCompatActivity {
         });
 
         booking_btn= activityBusInfoBinding.bookingBtn; //예약하기
-
         booking_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -69,6 +83,29 @@ public class BusInfo extends AppCompatActivity {
                 //화면 전환시 텀 없애기
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 ((Activity)v.getContext()).overridePendingTransition(0,0);
+            }
+        });
+
+        //경유 정류소
+        stationRouteViewmodel = new StationRouteViewmodel(StationRouteRepository.getStationRouteFirst());
+        activityBusInfoBinding.setStRouteviewmodel(stationRouteViewmodel);
+
+        mRecyclerView= activityBusInfoBinding.containerStRoute;
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        mAdapter = new StationRouteAdapter(mList);
+        mRecyclerView.setAdapter(mAdapter);
+
+        try {
+            mList= stationRouteViewmodel.useStationRoute(this.getApplicationContext(),busRouteId);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        stationRouteViewmodel.getStationRouteCurrentItem().observe(this, new androidx.lifecycle.Observer<ArrayList<StationRoute_Item>>() {
+            @Override
+            public void onChanged(ArrayList<StationRoute_Item> item) {
+                mAdapter.setItemsList((ArrayList<StationRoute_Item>) item);
             }
         });
 

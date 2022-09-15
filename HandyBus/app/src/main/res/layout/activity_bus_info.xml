@@ -11,6 +11,12 @@
             name="item"
             type="com.khackathon.handybus.model.RouteInfo_Item" />
 
+        <variable
+            name="stRouteviewmodel"
+            type="com.khackathon.handybus.viewmodel.StationRouteViewmodel" />
+        <variable
+            name="stRouteItem"
+            type="com.khackathon.handybus.model.StationRoute_Item" />
     </data>
 
     <LinearLayout
@@ -212,11 +218,11 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"/>
+            android:layout_weight="4"
+            android:id="@+id/container_stRoute"/>
 
     </LinearLayout>
 
