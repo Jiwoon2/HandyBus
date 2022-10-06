@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.khackathon.handybus.ui.home.HomeFragment;
-import com.khackathon.handybus.ui.link.BusLinkFragment;
+import com.khackathon.handybus.ui.site.BusLinkFragment;
 import com.khackathon.handybus.ui.notify.NotificationsFragment;
 import com.khackathon.handybus.ui.search.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

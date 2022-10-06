@@ -21,39 +21,39 @@ public class StationFromToList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stationfromto_list);
 
-        te1=findViewById(R.id.te1);
-        te2=findViewById(R.id.te2);
-        te3=findViewById(R.id.te3);
-
-        te1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                data= new Intent();
-                data.putExtra("출발지","화랑대");
-                setResult(0,data);
-                finish();
-            }
-        });
-
-        te2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                data= new Intent();
-                data.putExtra("출발지","화랑대사거리");
-                setResult(0,data);
-                finish();
-            }
-        });
-
-        te3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                data= new Intent();
-                data.putExtra("출발지","서울여대");
-                setResult(0,data);
-                finish();
-            }
-        });
+//        te1=findViewById(R.id.te1);
+//        te2=findViewById(R.id.te2);
+//        te3=findViewById(R.id.te3);
+//
+//        te1.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                data= new Intent();
+//                data.putExtra("출발지","화랑대");
+//                setResult(0,data);
+//                finish();
+//            }
+//        });
+//
+//        te2.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                data= new Intent();
+//                data.putExtra("출발지","화랑대사거리");
+//                setResult(0,data);
+//                finish();
+//            }
+//        });
+//
+//        te3.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                data= new Intent();
+//                data.putExtra("출발지","서울여대");
+//                setResult(0,data);
+//                finish();
+//            }
+//        });
 
 
     }

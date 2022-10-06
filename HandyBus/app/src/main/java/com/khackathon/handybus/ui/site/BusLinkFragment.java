@@ -1,4 +1,4 @@
-package com.khackathon.handybus.ui.link;
+package com.khackathon.handybus.ui.site;
 
 import android.content.Intent;
 import android.net.Uri;

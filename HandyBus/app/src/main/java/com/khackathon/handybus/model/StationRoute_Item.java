@@ -1,8 +1,8 @@
 package com.khackathon.handybus.model;
 
 public class StationRoute_Item {
-    public String busRouteId;
-    public String stationNm;
+    public String busRouteId; //버스 ID
+    public String stationNm; //정류소 이름
 
     public void clear(){
         busRouteId = "";

@@ -15,7 +15,9 @@
         android:theme="@style/Theme.HandyBus">
         <activity android:name="com.khackathon.handybus.activity.BusList" />
         <activity android:name="com.khackathon.handybus.activity.BusInfo" />
-        <activity android:name="com.khackathon.handybus.activity.ReserveActivity" />
+        <activity android:name="com.khackathon.handybus.activity.ReserveActivity" >
+
+        </activity>
         <activity android:name="com.khackathon.handybus.activity.StationFromToList" />
         <activity android:name=".activity.wbactivity.PostDetailActivity" />
         <activity android:name=".activity.wbactivity.PostActivity" />
