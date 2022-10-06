@@ -17,12 +17,16 @@
         <activity android:name="com.khackathon.handybus.activity.BusInfo" />
         <activity android:name="com.khackathon.handybus.activity.ReserveActivity" />
         <activity android:name="com.khackathon.handybus.activity.StationFromToList" />
-        <activity android:name="com.khackathon.handybus.MainActivity">
+        <activity android:name="com.khackathon.handybus.activity.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.khackathon.handybus.MainActivity">
+
         </activity>
     </application>
 
