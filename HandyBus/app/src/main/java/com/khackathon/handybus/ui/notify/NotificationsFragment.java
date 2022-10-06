@@ -1,4 +1,4 @@
-package com.khackathon.handybus.view.notify;
+package com.khackathon.handybus.ui.notify;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

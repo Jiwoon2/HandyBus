@@ -1,22 +1,17 @@
 package com.khackathon.handybus.activity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.khackathon.handybus.R;
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_login);
+        setContentView(R.layout.activity_login);
 
 //        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
 //

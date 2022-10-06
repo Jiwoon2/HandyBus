@@ -1,4 +1,4 @@
-package com.khackathon.handybus.view.home;
+package com.khackathon.handybus.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

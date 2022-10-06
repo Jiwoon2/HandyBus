@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.khackathon.handybus.view.home.HomeFragment;
+import com.khackathon.handybus.ui.home.HomeFragment;
 import com.khackathon.handybus.MainActivity;
 import com.khackathon.handybus.R;
 
@@ -38,7 +38,7 @@ public class ReserveActivity extends AppCompatActivity {
     String radio_type;
     String radio_wheel;
 
-    com.khackathon.handybus.view.home.HomeFragment HomeFragment;
+    com.khackathon.handybus.ui.home.HomeFragment HomeFragment;
 
     @SuppressLint("WrongViewCast")
     @Override

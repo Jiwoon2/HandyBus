@@ -6,7 +6,7 @@
     <data>
         <variable
             name="busstopviewmodel"
-            type="com.khackathon.handybus.view.search.BusStopViewmodel" />
+            type="com.khackathon.handybus.ui.search.BusStopViewmodel" />
 
 <!--        <variable-->
 <!--            name="serachfragment"-->

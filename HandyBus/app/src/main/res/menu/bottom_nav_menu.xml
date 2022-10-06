@@ -16,4 +16,16 @@
         android:icon="?android:attr/actionModeWebSearchDrawable"
         android:title="검색" />
 
+
+    <item
+        android:id="@+id/navigation_site"
+        android:icon="?android:attr/actionModeWebSearchDrawable"
+        android:title="사이트" />
+
+
+    <item
+        android:id="@+id/navigation_board"
+        android:icon="?android:attr/actionModeWebSearchDrawable"
+        android:title="게시판" />
+
 </menu>

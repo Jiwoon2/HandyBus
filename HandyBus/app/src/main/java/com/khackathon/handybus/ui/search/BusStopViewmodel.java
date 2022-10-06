@@ -1,4 +1,4 @@
-package com.khackathon.handybus.view.search;
+package com.khackathon.handybus.ui.search;
 
 import android.view.View;
 
