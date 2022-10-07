@@ -23,14 +23,14 @@
         <activity android:name=".activity.wbactivity.PostActivity" />
         <activity android:name="com.khackathon.handybus.activity.LoginActivity">
 
-        </activity>
-        <activity android:name="com.khackathon.handybus.MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.khackathon.handybus.MainActivity">
+
         </activity>
     </application>
 

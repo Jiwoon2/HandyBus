@@ -38,6 +38,8 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(v.getContext(), PostDetailActivity.class);
+                intent.putExtra("boardID",item.getPostID()); //게시글 고유 값 전달
+                System.out.println(item.getPostID()+"ㄹㄷㄴ23");
                 v.getContext().startActivity(intent);
             }
         });
@@ -46,7 +48,10 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if(items!=null){ //게시글이 있을때 출력
+            return items.size();
+        }
+        return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
