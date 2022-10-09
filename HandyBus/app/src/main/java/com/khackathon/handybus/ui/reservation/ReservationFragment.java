@@ -67,6 +67,7 @@ public class ReservationFragment extends Fragment {
 
     Button setbusNm_btn;
 
+    TextView tv_showNum;
     int personNum = 0;
     ImageButton num_minus;
     ImageButton num_plus;
@@ -112,6 +113,7 @@ public class ReservationFragment extends Fragment {
         res_busNum=v.findViewById(R.id.res_busNum);
         et_departures=v.findViewById(R.id.et_departures);
         et_arrivals=v.findViewById(R.id.et_arrivals);
+        tv_showNum=v.findViewById(R.id.tv_showNum);
         tv_num=v.findViewById(R.id.tv_num);
         et_help=v.findViewById(R.id.et_help);
         num_minus= v.findViewById(R.id.num_minus);
@@ -132,6 +134,7 @@ public class ReservationFragment extends Fragment {
             public void onClick(View v) {
                 personNum-=1;
                 tv_num.setText(personNum+"");
+                tv_showNum.setText("성인 "+personNum+"명");
             }
         });
         num_plus.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +142,7 @@ public class ReservationFragment extends Fragment {
             public void onClick(View v) {
                 personNum+=1;
                 tv_num.setText(personNum+"");
+                tv_showNum.setText("성인 "+personNum+"명");
             }
         });
 

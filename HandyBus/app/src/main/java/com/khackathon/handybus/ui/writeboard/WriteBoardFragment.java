@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +40,7 @@ public class WriteBoardFragment extends Fragment {
     private LinearLayoutManager mLayoutManager;
 
     private ArrayList<PostItem> PostingList;
-    Button write_btn;
+    ExtendedFloatingActionButton write_btn;
 
     Intent intent;
 
