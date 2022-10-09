@@ -43,8 +43,6 @@ public class LoginActivity extends AppCompatActivity {
         login_logo = findViewById(R.id.login_logo); //임의로 구글 로그인 사용
         mAuth = FirebaseAuth.getInstance();
 
-        System.out.println(FirebaseAuth.getInstance().getCurrentUser().getEmail() + "eeeeeeeeeeeeeee");
-
         //자동 로그인
         if (mAuth.getCurrentUser() != null) {
             Intent intent = new Intent(getApplication(), MainActivity.class);

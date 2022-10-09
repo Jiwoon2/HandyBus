@@ -2,16 +2,20 @@ package com.khackathon.handybus.activity.wbactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,10 +27,14 @@ import com.khackathon.handybus.adapter.wbadapter.CommentAdapter;
 import com.khackathon.handybus.model.wbmodel.CommentItem;
 import com.khackathon.handybus.model.wbmodel.PostItem;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -38,16 +46,24 @@ public class PostDetailActivity extends AppCompatActivity {
     TextView postdetail_date;
     TextView postdetail_title;
     TextView postdetail_content;
+    TextView postdetail_joinCnt;
+    Button postdetail_joinBtn;
     EditText comment_et;
     Button comment_btn;
 
     ArrayList<String> tempItems;
     PostItem postItem;
     ArrayList<CommentItem> commentItems;
+    HashMap<String, String> LoadCommentItems;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
+
+    private FirebaseAuth mAuth = null;
+    String userEmail;
+    String userNickName;
+    int joinCnt;
 
     Intent intent;
     String date;
@@ -61,47 +77,59 @@ public class PostDetailActivity extends AppCompatActivity {
         postdetail_date = findViewById(R.id.postdetail_date);
         postdetail_title = findViewById(R.id.postdetail_title);
         postdetail_content = findViewById(R.id.postdetail_content);
+        postdetail_joinCnt= findViewById(R.id.postdetail_joinCnt);
+        postdetail_joinBtn=findViewById(R.id.postdetail_joinBtn);
         comment_et = findViewById(R.id.comment_et);
         comment_btn = findViewById(R.id.comment_btn);
 
+        //댓글 작성자 정보
+        mAuth = FirebaseAuth.getInstance();
+        userEmail= mAuth.getCurrentUser().getEmail();
+        userNickName=mAuth.getCurrentUser().getDisplayName();
 
-        //서버에서 받은 게시물 데이터 할당
+
+        //서버에서 받은 게시물 값 할당
         intent = getIntent();
         boardID = intent.getStringExtra("boardID");
 
-        System.out.println(boardID + "ㄹㄷㄴ2");
-        postItem= new PostItem();
-        tempItems=new ArrayList<>();
+        postItem = new PostItem();
+        tempItems = new ArrayList<>();
+        LoadCommentItems = new HashMap<>();
 
         //postItems=new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("Board").child(boardID); //해당하는 값의 게시글
 
-        //
-        mReference.addValueEventListener(new ValueEventListener() {
+
+        //게시글만 가져옴
+        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                //System.out.println(snapshot.getChildren() + "anjsep"); //이상
-
-                //아님 정말 텍스트 어래이 만들어서 반복문에 넣는ㅂ방법? 근데 여기다가 댓글도 넣을거면.. 어떻게 될ㅈ..ㅣ
-                //코맨트만 if문써서 따로.... 다른곳에 저장하게..?
                 for (DataSnapshot post : snapshot.getChildren()) {
-                    System.out.println(post.getValue() + "anjsep");//전부 스트링 형태로 출력됨.
-                    tempItems.add(post.getValue().toString());
 
+                    if(!post.getKey().equals("comment")){
+                        System.out.println(post.getValue() + "anjsep");//전부 스트링 형태로 출력됨.
+                        tempItems.add(post.getValue().toString());
+                    }
                 }
 
-                //System.out.println(tempItems.size() + "anjsep22");//사이즈는 들어오는데..
                 //postItem = post.getValue(PostItem.class);
-                //값 할당- 서버에 올라간 순서대로- 아님 컨스터럭터로 한꺼번에.
-                postItem.setPostContent(tempItems.get(0)); //이게 왜 널이뜰까?
-                postItem.setPostDate(tempItems.get(1));
-                postItem.setPostID(tempItems.get(2));
-                postItem.setPostTitle(tempItems.get(3));
+                //settext로만 쓰일거면 postItem필요없긴함.
+//                postItem.setPostContent(tempItems.get(0));
+//                postItem.setPostDate(tempItems.get(1));
+//                postItem.setPostID(tempItems.get(2));
+//                postItem.setPostTitle(tempItems.get(3));
+//                postdetail_title.setText(postItem.getPostTitle());
+//                postdetail_content.setText(postItem.getPostContent());
+//                postdetail_date.setText(postItem.getPostDate());
 
-                postdetail_title.setText(postItem.getPostTitle());
-                postdetail_content.setText(postItem.getPostContent());
-                postdetail_date.setText(postItem.getPostDate());
+                postdetail_title.setText(tempItems.get(4));
+                postdetail_content.setText(tempItems.get(0));
+                postdetail_date.setText(tempItems.get(1));
+                postdetail_joinCnt.setText(tempItems.get(3));
+                postdetail_nickname.setText(tempItems.get(6));
+
+                joinCnt=Integer.parseInt(tempItems.get(3)); //참여자 수
 
             }
             @Override
@@ -110,23 +138,76 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
 
+        //댓글
+        mReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+                for (DataSnapshot post : snapshot.getChildren()) {
+                    System.out.println(post.getValue() + "anjsep444");//왜 이건 코맨트만이지???
+                    System.out.println(post.getClass().getName() + "anjsep333");//전부 스트링 형태로 출력됨.
 
+                    LoadCommentItems = (HashMap<String, String>) post.getValue();
+                    System.out.println(LoadCommentItems + "anjsep33355");//전부 스트링 형태로 출력됨.
+                    CommentItem item = new CommentItem(LoadCommentItems.get("cmtUserName"), LoadCommentItems.get("cmtUserEmail"), LoadCommentItems.get("cmtDate"), LoadCommentItems.get("cmtContent"));
+                    commentItems.add(item);
+                }
 
+            }
 
+            @Override
+            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        //참여하기 버튼
+        postdetail_joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                joinCnt+=1;
+
+                Map<String, Object> jCnt = new HashMap<>();
+                jCnt.put("postJoinCnt",joinCnt);
+                mReference.updateChildren(jCnt);
+
+                postdetail_joinCnt.setText(joinCnt+"");
+                Toast toast=Toast.makeText(getApplicationContext(),"해당 게시글에 참여하였습니다",Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
 
         //댓글 등록버튼 누르면 코맨트 아이템에 저장하고 리사이클뷰에 추가
         comment_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = comment_et.getText().toString();
-                //얻을 수 있는건 내용, 날짜. 그래서 쓰는 사람의 id는 서버 연결후 같이 보내줘야됨. id랑 이름도 같이?
+                date = getDate();
 
+                //동적배열로 댓글을 쌓음
+                commentItems.add(new CommentItem(userNickName, userEmail, date, content));
 
-                date= getDate();
+                Map<String, Object> commentUpdates = new HashMap<>();
+                commentUpdates.put("/comment/", commentItems);
+                //commentUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
-                commentItems.add(new CommentItem("id", "date", content));
-                mAdapter.notifyDataSetChanged(); //DiffUtil ?
+                mReference.updateChildren(commentUpdates);
+
+                mAdapter.notifyDataSetChanged();
 
                 //등록되면 텍스트뷰 비우기
                 comment_et.setText("");

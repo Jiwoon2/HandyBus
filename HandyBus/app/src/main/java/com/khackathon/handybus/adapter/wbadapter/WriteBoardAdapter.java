@@ -33,6 +33,9 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
         PostItem item= items.get(position);
         holder.title.setText(item.getPostTitle());
         holder.content.setText(item.getPostContent());
+        holder.date.setText(item.getPostDate());
+        holder.joinCnt.setText(item.getPostJoinCnt()+"");
+        holder.nickName.setText(item.getPostUserName());
 
         holder.item_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +60,9 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView content;
+        public TextView joinCnt;
+        public TextView nickName;
+        public TextView date;
         LinearLayout item_layout;
 
         public ViewHolder(View itemView) {
@@ -64,8 +70,11 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
 
             title= itemView.findViewById(R.id.tv_board_title);
             content= itemView.findViewById(R.id.tv_board_content);
-            item_layout= itemView.findViewById(R.id.board_item_layout);
+            joinCnt= itemView.findViewById(R.id.tv_board_joinCnt);
+            nickName= itemView.findViewById(R.id.tv_board_nickName);
+            date= itemView.findViewById(R.id.tv_board_date);
 
+            item_layout= itemView.findViewById(R.id.board_item_layout);
         }
     }
 }

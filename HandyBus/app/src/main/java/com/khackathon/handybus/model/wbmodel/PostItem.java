@@ -8,6 +8,7 @@ public class PostItem {
     String postID;
     String postUserEmail;
     String postUserName;
+    int postJoinCnt;
 
 
     public PostItem(){};
@@ -34,6 +35,18 @@ public class PostItem {
         this.postID = postID;
     }
 
+    public void setPostUserEmail(String postUserEmail) {
+        this.postUserEmail = postUserEmail;
+    }
+
+    public void setPostUserName(String postUserName) {
+        this.postUserName = postUserName;
+    }
+
+    public void setPostJoinCnt(int postJoinCnt) {
+        this.postJoinCnt = postJoinCnt;
+    }
+
     public String getPostTitle() {
         return postTitle;
     }
@@ -48,5 +61,17 @@ public class PostItem {
 
     public String getPostID() {
         return postID;
+    }
+
+    public String getPostUserEmail() {
+        return postUserEmail;
+    }
+
+    public String getPostUserName() {
+        return postUserName;
+    }
+
+    public int getPostJoinCnt() {
+        return postJoinCnt;
     }
 }

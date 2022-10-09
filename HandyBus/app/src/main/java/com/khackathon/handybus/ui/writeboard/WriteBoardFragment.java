@@ -1,5 +1,6 @@
 package com.khackathon.handybus.ui.writeboard;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +46,7 @@ public class WriteBoardFragment extends Fragment {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
 
+    PostItem item;
 
     Button post_btn;
 
@@ -64,68 +67,62 @@ public class WriteBoardFragment extends Fragment {
 
         mReference = mDatabase.getReference("Board"); // 변경값을 확인할 child 이름
 
-        //false니까 지금 출력되는거고... 그래서 2개가 뜨는거임 추가된건 추가된것만 뜨고있음지금..
 
-//        PostActivity.postFlag=false;
-//
-//        if(!PostActivity.postFlag){
-//
-//        }
-
-//            //한 번만 가져옴
-//        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot snapshot) {
-//                for (DataSnapshot post : snapshot.getChildren()) {
-//                    PostItem item= post.getValue(PostItem.class);
-//                    PostingList.add(item);
-//
-//                    //PostingList.add(post.getValue(PostItem.class)); //바로 보여지지않음..
-//                    System.out.println(PostingList.size()+"ㄹㄷㄴ");
-//
-//                }
-//                mAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-
-        //바뀐 것만 가져옴
-        mReference.addChildEventListener(new ChildEventListener() {
+        //한 번만 가져옴
+        mReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-                PostItem item= snapshot.getValue(PostItem.class);
-                PostingList.add(item);
-
+            public void onDataChange(DataSnapshot snapshot) {
+                PostingList.clear();
+                for (DataSnapshot post : snapshot.getChildren()) {
+                    PostItem item= post.getValue(PostItem.class);
+                    PostingList.add(item);
+                }
                 mAdapter.notifyDataSetChanged();
-
-                System.out.println("jjjjjjjjj");
-            }
-
-            @Override
-            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
             }
 
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
-
         });
+
+        //바뀐 것만 가져옴
+//        mReference.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
+//                item= snapshot.getValue(PostItem.class);
+//                PostingList.add(item);
+//                mAdapter.notifyDataSetChanged();
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//
+//                PostItem item= snapshot.getValue(PostItem.class); //이럼 하위에 추가되고..
+//
+//                PostingList.add(item);
+//
+//
+//                mAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//
+//        });
 
 
         mRecyclerView = v.findViewById(R.id.container_boardList);
@@ -138,35 +135,7 @@ public class WriteBoardFragment extends Fragment {
         mAdapter = new WriteBoardAdapter(PostingList);
         mRecyclerView.setAdapter(mAdapter);
 
-
-
         //initDatabase();
-
-
-
-        //전부 다시
-//        mReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                //리스트를 클리어안하면 중복됨..
-//                PostingList.clear();
-//
-//                for (DataSnapshot post : dataSnapshot.getChildren()) {
-//                    PostingList.add(post.getValue(PostItem.class)); //바로 보여지지않음..
-//                    System.out.println(PostingList.size()+"ㄹㄷㄴ");
-//
-//                }
-//                mAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-
 
         //누르면 게시글 입력할 수 있는 창으로 이동
         write_btn.setOnClickListener(new View.OnClickListener() {
@@ -174,8 +143,6 @@ public class WriteBoardFragment extends Fragment {
             public void onClick(View v) {
                 intent= new Intent(v.getContext(), PostActivity.class);
                 startActivity(intent);
-                //getActivity().startActivityForResult(intent,5);
-
             }
         });
 

@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +35,11 @@ public class PostActivity extends AppCompatActivity {
     public static boolean postFlag=false;
 
 
+    private FirebaseAuth mAuth = null;
+    String userEmail;
+    String userNickName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,11 @@ public class PostActivity extends AppCompatActivity {
         post_btn=findViewById(R.id.post_btn);
         EditTitle=findViewById(R.id.EditTitle);
         EditContent=findViewById(R.id.EditContent);
+
+        //게시글 작성자 정보
+        mAuth = FirebaseAuth.getInstance();
+        userEmail= mAuth.getCurrentUser().getEmail();
+        userNickName=mAuth.getCurrentUser().getDisplayName();
 
 
         //database
@@ -60,11 +71,13 @@ public class PostActivity extends AppCompatActivity {
 
                 item=new PostItem();
 
-                //아이템에 또 필요한거 추가
                 item.setPostTitle(EditTitle.getText().toString());
                 item.setPostContent(EditContent.getText().toString());
                 item.setPostDate(date);
                 item.setPostID(boardID);
+                item.setPostUserEmail(userEmail);
+                item.setPostUserName(userNickName);
+                item.setPostJoinCnt(0);
 
 
                 //conditionRef.setValue(date);
@@ -76,12 +89,6 @@ public class PostActivity extends AppCompatActivity {
                 //push()로 게시글id를 랜덤값으로 생성
 
                 mDatabase.child("Board").child(boardID).setValue(item);
-
-                System.out.println(boardID+"ㄹㄷㄴ");
-
-//                postFlag=true;
-//                System.out.println(PostActivity.postFlag+"jjjjjjjjj2");
-
 
                 finish();
                 overridePendingTransition(R.anim.none, R.anim.vertical_exit);

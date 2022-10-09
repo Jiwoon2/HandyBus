@@ -9,14 +9,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_board_title"
-            android:layout_width="wrap_content"
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#CCCCCC"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="제목"
-            android:textSize="40sp" />
+            android:baselineAligned="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:id="@+id/tv_board_nickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_board_joinCnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="참여수"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_board_content"
@@ -25,20 +51,40 @@
             android:text="내용"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/tv_board_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/tv_board_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목"
+            android:textSize="40sp" />
+
+
+
     </LinearLayout>
 
 <!--    <com.google.android.material.card.MaterialCardView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="150dp"-->
-<!--        android:layout_margin="5dp"-->
 <!--        app:cardBackgroundColor="#f7f2f3"-->
 <!--        app:strokeColor="@color/black"-->
-<!--        app:strokeWidth="2dp"-->
-<!--        app:cardCornerRadius="12dp"-->
+<!--        app:strokeWidth="1dp"-->
 <!--        app:cardElevation="3dp"-->
 <!--        app:contentPadding="4dp">-->
 
-<!--       -->
+<!--        <TextView-->
+<!--            android:id="@+id/tv_board_contㄱㄱent"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="내용"-->
+<!--            android:textSize="20sp" />-->
 
 
 <!--    </com.google.android.material.card.MaterialCardView>-->
