@@ -1,4 +1,4 @@
-package com.khackathon.handybus.ui.home;
+package com.khackathon.handybus.ui.confirmReservation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.khackathon.handybus.R;
 
 
-public class HomeFragment extends Fragment {
+public class ConfirmReservationFragment extends Fragment {
     View v;
     String et_departures;
     String et_arrivals;
@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        v=inflater.inflate(R.layout.fragment_home, container,false);
+        v=inflater.inflate(R.layout.fragment_confirmreservation, container,false);
 
         tv_isReservation=v.findViewById(R.id.tv_isReservation);
         tv_departStation=v.findViewById(R.id.tv_departStation);
@@ -44,8 +44,6 @@ public class HomeFragment extends Fragment {
         tv_personNm=v.findViewById(R.id.tv_personNm);
         tv_help=v.findViewById(R.id.tv_help);
         refresh_btn=v.findViewById(R.id.refresh_btn);
-
-
 
 
         return  v;

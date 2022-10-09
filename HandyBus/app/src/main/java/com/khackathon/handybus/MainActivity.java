@@ -9,9 +9,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.khackathon.handybus.ui.home.HomeFragment;
+import com.khackathon.handybus.ui.confirmReservation.ConfirmReservationFragment;
+import com.khackathon.handybus.ui.reservation.ReservationFragment;
 import com.khackathon.handybus.ui.site.BusLinkFragment;
-import com.khackathon.handybus.ui.notify.NotificationsFragment;
 import com.khackathon.handybus.ui.search.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.khackathon.handybus.ui.writeboard.WriteBoardFragment;
@@ -19,48 +19,42 @@ import com.khackathon.handybus.ui.writeboard.WriteBoardFragment;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    HomeFragment homeFragment;
-    NotificationsFragment notificationsFragment;
     SearchFragment searchFragment;
-
+    ReservationFragment reservationFragment;
+    ConfirmReservationFragment confirmReservationFragment;
     BusLinkFragment busLinkFragment;
     WriteBoardFragment writeBoardFragment;
 
-    String a;
-
     public static Activity Main;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bottomNavigationView= findViewById(R.id.nav_view);
+        bottomNavigationView = findViewById(R.id.nav_view);
 
-        homeFragment=new HomeFragment();
-        notificationsFragment= new NotificationsFragment();
-        searchFragment= new SearchFragment();
-
+        searchFragment = new SearchFragment();
+        reservationFragment= new ReservationFragment();
+        confirmReservationFragment = new ConfirmReservationFragment();
         busLinkFragment = new BusLinkFragment();
-        writeBoardFragment= new WriteBoardFragment();
-
-
-        //getSupportFragmentManager().beginTransaction().replace(R.id.content_layout,blankFragment).commit();
+        writeBoardFragment = new WriteBoardFragment();
 
         //처음 화면에 고정할 화면 설정
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout,homeFragment).commitAllowingStateLoss();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, searchFragment).commitAllowingStateLoss();
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, homeFragment).commit();
-                    return true;
-                case R.id.navigation_notifications:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, notificationsFragment).commit();
-                    return true;
                 case R.id.navigation_search:
                     getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, searchFragment).commit();
                     return true;
+                case R.id.navigation_reservation:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, reservationFragment).commit();
+                    return true;
+                case R.id.navigation_confirmReservation:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, confirmReservationFragment).commit();
+                    return true;
+
                 case R.id.navigation_site:
                     getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, busLinkFragment).commit();
                     return true;
@@ -78,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 프래그먼트-> 프래그먼트 전환
-    public void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager= getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content_layout, fragment ).commit();
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_layout, fragment).commit();
     }
 
 

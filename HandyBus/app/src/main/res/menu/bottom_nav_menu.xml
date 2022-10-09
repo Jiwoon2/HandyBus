@@ -2,20 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="홈" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="알림" />
-
-    <item
         android:id="@+id/navigation_search"
         android:icon="?android:attr/actionModeWebSearchDrawable"
-        android:title="검색" />
+        android:title="조회" />
 
+    <item
+        android:id="@+id/navigation_reservation"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="예약" />
+
+    <item
+        android:id="@+id/navigation_confirmReservation"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="예약 확인" />
 
     <item
         android:id="@+id/navigation_site"

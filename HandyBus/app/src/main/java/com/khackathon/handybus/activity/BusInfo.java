@@ -72,19 +72,19 @@ public class BusInfo extends AppCompatActivity {
             }
         });
 
-        booking_btn= activityBusInfoBinding.bookingBtn; //예약하기
-        booking_btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                intent= new Intent(v.getContext(), ReserveActivity.class);
-                intent.putExtra("busRouteNm",busRouteNm); //노선명 전달
-                startActivity(intent);
-
-                //화면 전환시 텀 없애기
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                ((Activity)v.getContext()).overridePendingTransition(0,0);
-            }
-        });
+//        booking_btn= activityBusInfoBinding.bookingBtn; //예약하기
+//        booking_btn.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                intent= new Intent(v.getContext(), ReserveActivity.class);
+//                intent.putExtra("busRouteNm",busRouteNm); //노선명 전달
+//                startActivity(intent);
+//
+//                //화면 전환시 텀 없애기
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                ((Activity)v.getContext()).overridePendingTransition(0,0);
+//            }
+//        });
 
         //경유 정류소
         stationRouteViewmodel = new StationRouteViewmodel(StationRouteRepository.getStationRouteFirst());

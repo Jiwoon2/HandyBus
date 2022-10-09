@@ -9,9 +9,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khackathon.handybus.R;
-import com.khackathon.handybus.activity.ReserveActivity;
 import com.khackathon.handybus.databinding.StationrouteItemBinding;
 import com.khackathon.handybus.model.StationRoute_Item;
+import com.khackathon.handybus.ui.reservation.ReservationFragment;
 
 import java.util.ArrayList;
 
@@ -59,14 +59,23 @@ public class StationRouteAdapter extends RecyclerView.Adapter<StationRouteAdapte
 
                 //전역변수 플래그 값으로 구별
                 //출발지 설정
-                if(ReserveActivity.selectFlag==0){
-                    ReserveActivity.et_departures.setText(stationNm);
+                if(ReservationFragment.selectFlag==0){
+                    ReservationFragment.et_departures.setText(stationNm);
                 }
                 //도착지 설정
-                else if(ReserveActivity.selectFlag==1){
-                    ReserveActivity.et_arrivals.setText(stationNm);
+                else if(ReservationFragment.selectFlag==1){
+                    ReservationFragment.et_arrivals.setText(stationNm);
                 }
-                ReserveActivity.dialog.dismiss(); // dialog 종료
+                ReservationFragment.dialog.dismiss(); // dialog 종료
+
+//                if(ReserveActivity.selectFlag==0){
+//                    ReserveActivity.et_departures.setText(stationNm);
+//                }
+//                //도착지 설정
+//                else if(ReserveActivity.selectFlag==1){
+//                    ReserveActivity.et_arrivals.setText(stationNm);
+//                }
+//                ReserveActivity.dialog.dismiss(); // dialog 종료
             }
         });
     }
