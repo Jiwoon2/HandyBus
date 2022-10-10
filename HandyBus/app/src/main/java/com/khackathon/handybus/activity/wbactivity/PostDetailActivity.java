@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -190,6 +191,9 @@ public class PostDetailActivity extends AppCompatActivity {
                 toast.show();
             }
         });
+
+        //댓글란 키보드로 가리기 방지
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         //댓글 등록버튼 누르면 코맨트 아이템에 저장하고 리사이클뷰에 추가
         comment_btn.setOnClickListener(new View.OnClickListener() {

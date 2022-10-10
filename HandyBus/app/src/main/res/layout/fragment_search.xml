@@ -93,9 +93,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#CCCCCC"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/container_busStop"/>

@@ -7,151 +7,157 @@
     android:orientation="vertical"
     tools:context=".activity.wbactivity.PostDetailActivity">
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/linearLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <!-- <androidx.constraintlayout.widget.ConstraintLayout
+         android:id="@+id/linearLayout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <TextView-->
-<!--            android:id="@+id/postdetail_nickname"-->
-<!--            android:layout_width="46dp"-->
-<!--            android:layout_height="51dp"-->
-<!--            android:text="닉네임"-->
-<!--            app:layout_constraintStart_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+         <TextView
+             android:id="@+id/postdetail_nickname"
+             android:layout_width="46dp"
+             android:layout_height="51dp"
+             android:text="닉네임"
+             app:layout_constraintStart_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/postdetail_date"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="right"-->
-<!--            android:text="날짜"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.0" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/postdetail_nickname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="닉네임"/>
-
-                <TextView
-                    android:id="@+id/postdetail_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="날짜"/>
+         <TextView
+             android:id="@+id/postdetail_date"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+             android:text="날짜"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintVertical_bias="0.0" />
+     </androidx.constraintlayout.widget.ConstraintLayout> -->
 
 
-            </LinearLayout>
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/postdetail_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="제목"/>
-
-                <TextView
-                    android:id="@+id/postdetail_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="내용"/>
-
-                <TextView
-                    android:id="@+id/postdetail_joinCnt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="참여자 수"/>
-
-                <Button
-                    android:id="@+id/postdetail_joinBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="참여하기"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="250dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/container_comment_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/comment_et"
-                android:layout_width="0dp"
-                android:padding="8dp"
-                android:layout_height="wrap_content"
-                android:background="#eeeeee"
-                android:layout_weight="1"
-                android:hint="댓글 내용을 입력하세요"/>
-            <Button
-                android:id="@+id/comment_btn"
+            <TextView
+                android:id="@+id/postdetail_nickname"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="등록하기"/>
+                android:layout_height="wrap_content"
+                android:text="닉네임" />
+
+            <TextView
+                android:id="@+id/postdetail_joinCnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="참여자 수" />
+
+
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal">-->
+    </LinearLayout>
 
-<!--    &lt;!&ndash;        댓글란&ndash;&gt;-->
-<!--            <EditText-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:hint="댓글을 작성하세요"/>-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-<!--            <Button-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="등록"/>-->
+        <TextView
+            android:id="@+id/postdetail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목" />
+
+        <TextView
+            android:id="@+id/postdetail_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내용" />
 
 
-<!--        </LinearLayout>-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/postdetail_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜" />
+
+        <Button
+            android:id="@+id/postdetail_joinBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참여하기" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/container_comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/reserbtn"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/comment_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="댓글을 작성하세요"
+            android:background="@null"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/comment_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="등록하기" />
+
+    </LinearLayout>
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--    &lt;!&ndash;        댓글란&ndash;&gt;-->
+    <!--            <EditText-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="댓글을 작성하세요"/>-->
+
+    <!--            <Button-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:text="등록"/>-->
+
+
+    <!--        </LinearLayout>-->
 
 
 </LinearLayout>
