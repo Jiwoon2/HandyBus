@@ -65,7 +65,7 @@ public class ReservationFragment extends Fragment {
     TextView tv_num;
     EditText et_help;
 
-    Button setbusNm_btn;
+    ImageButton setbusNm_btn;
 
     TextView tv_showNum;
     int personNum = 0;

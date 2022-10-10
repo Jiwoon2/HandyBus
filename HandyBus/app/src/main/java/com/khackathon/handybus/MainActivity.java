@@ -8,7 +8,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.khackathon.handybus.ui.confirmReservation.ConfirmReservationFragment;
 import com.khackathon.handybus.ui.reservation.ReservationFragment;
 import com.khackathon.handybus.ui.site.BusLinkFragment;
@@ -25,20 +27,25 @@ public class MainActivity extends AppCompatActivity {
     BusLinkFragment busLinkFragment;
     WriteBoardFragment writeBoardFragment;
 
-    public static Activity Main;
-    Intent intent;
+    private FirebaseAuth mAuth = null;
+    TextView main_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.nav_view);
+        main_name = findViewById(R.id.main_name);
 
         searchFragment = new SearchFragment();
         reservationFragment= new ReservationFragment();
         confirmReservationFragment = new ConfirmReservationFragment();
         busLinkFragment = new BusLinkFragment();
         writeBoardFragment = new WriteBoardFragment();
+
+        //이름 상단 위치
+        mAuth = FirebaseAuth.getInstance();
+        main_name.setText(mAuth.getCurrentUser().getDisplayName()+"님");
 
         //처음 화면에 고정할 화면 설정
         getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, searchFragment).commitAllowingStateLoss();

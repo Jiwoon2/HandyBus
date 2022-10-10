@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/main_head"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:weightSum="7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +29,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5" >
             <TextView
+                android:id="@+id/main_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="님"/>
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="000님"/>
 
         </LinearLayout>
 

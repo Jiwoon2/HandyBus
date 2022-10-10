@@ -46,6 +46,8 @@ public class BusList extends AppCompatActivity {
         mRecyclerView= activityBusListBinding.containerBusList;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        mRecyclerView.setHasFixedSize(true);//옵션
+
         //mList= buslistViewmodel.getBusListRepository(); //없어도 상관 x
 
         mAdapter = new BusListAdapter(mList);

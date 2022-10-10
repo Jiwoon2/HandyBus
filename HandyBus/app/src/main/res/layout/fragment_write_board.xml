@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="30dp"
-        app:strokeColor="@color/purple_200"
+        app:strokeColor="#676CFB"
         app:backgroundTint="#FFFFFF"
         app:strokeWidth="2dp"
         android:text="게시글 작성"
