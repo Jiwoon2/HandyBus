@@ -25,24 +25,21 @@
                 android:layout_height="wrap_content"
                 android:baselineAligned="true"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:padding="10dp"
                 android:weightSum="3.7">
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="25dp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/circle"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:background="@drawable/circle">
 
                     <TextView
                         android:id="@+id/routeType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text=""
+                        android:text="dd"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="15dp" />
@@ -78,7 +75,7 @@
 
                     <TextView
                         android:id="@+id/arrmsg1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.3"
                         android:gravity="center_vertical"
@@ -93,7 +90,7 @@
 
                     <TextView
                         android:id="@+id/arrmsg2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.3"
                         android:text="@{buslistItem.busArrmsg2}"

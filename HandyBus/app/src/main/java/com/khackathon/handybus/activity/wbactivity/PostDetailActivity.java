@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,8 +50,9 @@ public class PostDetailActivity extends AppCompatActivity {
     TextView postdetail_content;
     TextView postdetail_joinCnt;
     Button postdetail_joinBtn;
+    ImageButton postdetailBack_btn;
     EditText comment_et;
-    Button comment_btn;
+    ImageButton comment_btn;
 
     ArrayList<String> tempItems;
     PostItem postItem;
@@ -80,6 +82,7 @@ public class PostDetailActivity extends AppCompatActivity {
         postdetail_content = findViewById(R.id.postdetail_content);
         postdetail_joinCnt= findViewById(R.id.postdetail_joinCnt);
         postdetail_joinBtn=findViewById(R.id.postdetail_joinBtn);
+        postdetailBack_btn=findViewById(R.id.postdetailBack_btn);
         comment_et = findViewById(R.id.comment_et);
         comment_btn = findViewById(R.id.comment_btn);
 
@@ -115,7 +118,7 @@ public class PostDetailActivity extends AppCompatActivity {
                 }
 
                 //postItem = post.getValue(PostItem.class);
-                //settext로만 쓰일거면 postItem필요없긴함.
+                //settext로만 쓰일거면 postItem필요없음.
 //                postItem.setPostContent(tempItems.get(0));
 //                postItem.setPostDate(tempItems.get(1));
 //                postItem.setPostID(tempItems.get(2));
@@ -126,7 +129,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
                 postdetail_title.setText(tempItems.get(4));
                 postdetail_content.setText(tempItems.get(0));
-                postdetail_date.setText(tempItems.get(1));
+                postdetail_date.setText(tempItems.get(1).split(",")[0]); //초 제외
                 postdetail_joinCnt.setText(tempItems.get(3));
                 postdetail_nickname.setText(tempItems.get(6));
 
@@ -231,13 +234,21 @@ public class PostDetailActivity extends AppCompatActivity {
         mAdapter = new CommentAdapter(commentItems);
         mRecyclerView.setAdapter(mAdapter);
 
+        //뒤로가기 버튼
+        postdetailBack_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     // 날짜
     private String getDate() {
         long now = System.currentTimeMillis(); //현재 시간
         Date date = new Date(now); //date 형식으로 변경
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss"); //포맷설정
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh:mm,ss"); //포맷설정
         String getDate = dateFormat.format(date);
 
         return getDate;

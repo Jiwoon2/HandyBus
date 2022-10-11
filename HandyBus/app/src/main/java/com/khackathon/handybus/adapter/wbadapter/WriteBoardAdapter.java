@@ -33,7 +33,7 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
         PostItem item= items.get(position);
         holder.title.setText(item.getPostTitle());
         holder.content.setText(item.getPostContent());
-        holder.date.setText(item.getPostDate());
+        holder.date.setText(item.getPostDate().split(",")[0]);//초 제외
         holder.joinCnt.setText(item.getPostJoinCnt()+"");
         holder.nickName.setText(item.getPostUserName());
 
@@ -42,7 +42,6 @@ public class WriteBoardAdapter extends RecyclerView.Adapter<WriteBoardAdapter.Vi
             public void onClick(View v) {
                 Intent intent= new Intent(v.getContext(), PostDetailActivity.class);
                 intent.putExtra("boardID",item.getPostID()); //게시글 고유 값 전달
-                System.out.println(item.getPostID()+"ㄹㄷㄴ23");
                 v.getContext().startActivity(intent);
             }
         });

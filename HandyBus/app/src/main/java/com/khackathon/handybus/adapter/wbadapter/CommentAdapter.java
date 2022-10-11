@@ -48,7 +48,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         public ViewHolder(View itemView) {
             super(itemView);
-            userID= itemView.findViewById(R.id.tv_cmt_userID);
+            userID= itemView.findViewById(R.id.tv_cmt_userName);
             date= itemView.findViewById(R.id.tv_cmt_date);
             content= itemView.findViewById(R.id.tv_cmt_content);
         }

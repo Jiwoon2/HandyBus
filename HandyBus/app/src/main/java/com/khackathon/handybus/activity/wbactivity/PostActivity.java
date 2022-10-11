@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PostActivity extends AppCompatActivity {
+    ImageButton postBack_btn;
     Button post_btn;
     EditText EditTitle;
     EditText EditContent;
@@ -47,6 +49,7 @@ public class PostActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.vertical_enter, R.anim.none);
 
+        postBack_btn=findViewById(R.id.postBack_btn);
         post_btn=findViewById(R.id.post_btn);
         EditTitle=findViewById(R.id.EditTitle);
         EditContent=findViewById(R.id.EditContent);
@@ -80,14 +83,7 @@ public class PostActivity extends AppCompatActivity {
                 item.setPostJoinCnt(0);
 
 
-                //conditionRef.setValue(date);
-
-                //setvalue 해당 경로 데이터 모두 바꿈- 근데 게시글 작성이니까 ㄱㅊ
-                //두번째 찰드에는 게시글구분해야되니까 게시글 고유id가 들어가겠네
-                //mDatabase.child("users").child("asdf").setValue(item);
-
                 //push()로 게시글id를 랜덤값으로 생성
-
                 mDatabase.child("Board").child(boardID).setValue(item);
 
                 finish();
@@ -95,6 +91,13 @@ public class PostActivity extends AppCompatActivity {
             }
         });
 
+        //뒤로가기 버튼
+        postBack_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
 //        conditionRef.addValueEventListener(new ValueEventListener() {
@@ -109,8 +112,15 @@ public class PostActivity extends AppCompatActivity {
 //
 //            }
 //        });
+    }
+    // 날짜
+    private String getDate() {
+        long now = System.currentTimeMillis(); //현재 시간
+        Date date = new Date(now); //date 형식으로 변경
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh:mm,ss"); //포맷설정
+        String getDate = dateFormat.format(date);
 
-
+        return getDate;
     }
 
 //    @Override
@@ -139,13 +149,5 @@ public class PostActivity extends AppCompatActivity {
 //    }
 
 
-    // 날짜
-    private String getDate() {
-        long now = System.currentTimeMillis(); //현재 시간
-        Date date = new Date(now); //date 형식으로 변경
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm:ss"); //포맷설정
-        String getDate = dateFormat.format(date);
 
-        return getDate;
-    }
 }
