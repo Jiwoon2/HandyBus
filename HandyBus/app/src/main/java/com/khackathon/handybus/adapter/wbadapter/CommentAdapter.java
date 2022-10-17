@@ -28,7 +28,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         CommentItem item= items.get(position);
         holder.userID.setText(item.getCmtUserName());
-        holder.date.setText(item.getCmtDate());
+        holder.date.setText(item.getCmtDate().split(",")[0]);
         holder.content.setText(item.getCmtContent());
 
     }

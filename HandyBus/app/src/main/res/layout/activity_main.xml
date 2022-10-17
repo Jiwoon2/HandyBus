@@ -31,8 +31,9 @@
                 android:id="@+id/main_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="left|center_vertical"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 android:text="000님"/>
 
         </LinearLayout>
@@ -41,20 +42,21 @@
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_launcher_background" />
+            android:padding="10dp"
+            android:src="@drawable/mainlogo" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1" />-->
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
+            android:layout_weight="2.5"
+            android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:padding="10dp"
+            android:padding="13dp"
             android:src="@drawable/mypageimg"
             android:scaleType="centerInside" />
     </LinearLayout>
