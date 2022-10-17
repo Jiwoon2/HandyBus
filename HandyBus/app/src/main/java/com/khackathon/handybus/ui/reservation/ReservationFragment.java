@@ -1,15 +1,12 @@
 package com.khackathon.handybus.ui.reservation;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,13 +31,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.khackathon.handybus.MainActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.khackathon.handybus.R;
-import com.khackathon.handybus.activity.ReserveActivity;
 import com.khackathon.handybus.adapter.StationRouteAdapter;
 import com.khackathon.handybus.model.StationRouteRepository;
 import com.khackathon.handybus.model.StationRoute_Item;
-import com.khackathon.handybus.ui.confirmReservation.ConfirmReservationFragment;
+import com.khackathon.handybus.model.UserReserv_Item;
 import com.khackathon.handybus.viewmodel.StationRouteViewmodel;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -103,6 +101,11 @@ public class ReservationFragment extends Fragment {
     static RequestQueue requestQueue;
     String TAG = "BUS ID";
 
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth = null;
+    String userEmail;
+    UserReserv_Item userReservitem;
+
     static private MutableLiveData<String> busNm = new MutableLiveData<>();
 
     @Override
@@ -128,6 +131,10 @@ public class ReservationFragment extends Fragment {
 
         setbusNm_btn = v.findViewById(R.id.setbusNm_btn);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        userEmail= mAuth.getCurrentUser().getEmail();
+
         //탑승 인원 수
         num_minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,17 +157,14 @@ public class ReservationFragment extends Fragment {
         radio_hasWheel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                radio_wheel="휠체어 소지";
-                System.out.println("hhhhhh1111"+radio_wheel);
+                radio_wheel="소지";
             }
         });
 
         radio_nonWheel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                radio_wheel="휠체어 없음";
-                System.out.println("hhhhhh1111222222"+radio_wheel);
+                radio_wheel="해당 없음";
             }
         });
 
@@ -170,6 +174,19 @@ public class ReservationFragment extends Fragment {
             public void onClick(View v) {
                 //데이터 서버에 저장
 
+                userReservitem = new UserReserv_Item();
+                userReservitem.setResDepartures(et_departures.getText().toString());
+                userReservitem.setResArrivals(et_arrivals.getText().toString());
+                userReservitem.setResBusNum(res_busNum.getText().toString());
+                userReservitem.setResNum(tv_num.getText().toString());
+                userReservitem.setResWheel(radio_wheel);
+                userReservitem.setResHelp(et_help.getText().toString());
+
+                mDatabase.child("User").child(userEmail.split("\\.")[0]).setValue(userReservitem);
+
+                //예약 정보 없애기
+                res_busNum.setText("");
+                et_help.setText("");
             }
         });
 
