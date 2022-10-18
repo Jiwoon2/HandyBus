@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         //이름 상단 위치
         mAuth = FirebaseAuth.getInstance();
         main_name.setText(mAuth.getCurrentUser().getDisplayName()+"님");
+
+        //임시 로그아웃
+        main_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
 
         //처음 화면에 고정할 화면 설정
         getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, searchFragment).commitAllowingStateLoss();

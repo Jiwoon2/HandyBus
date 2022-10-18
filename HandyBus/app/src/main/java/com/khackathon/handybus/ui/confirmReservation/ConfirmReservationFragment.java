@@ -21,6 +21,8 @@ import com.khackathon.handybus.model.UserReserv_Item;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -40,6 +42,9 @@ public class ConfirmReservationFragment extends Fragment {
     TextView tv_personNm;
     TextView tv_wheel;
     TextView tv_help;
+    TextView tv_reservDate;
+    TextView tv_reservDepart;
+    TextView tv_reservArrival;
 
     Button refresh_btn;
 
@@ -62,6 +67,9 @@ public class ConfirmReservationFragment extends Fragment {
         tv_wheel=v.findViewById(R.id.tv_wheel);
         tv_help=v.findViewById(R.id.tv_help);
         refresh_btn=v.findViewById(R.id.refresh_btn);
+        tv_reservDate=v.findViewById(R.id.tv_reservDate);
+        tv_reservDepart=v.findViewById(R.id.tv_reservDepart);
+        tv_reservArrival=v.findViewById(R.id.tv_reservArrival);
 
         mDatabase = FirebaseDatabase.getInstance();
 
@@ -90,7 +98,9 @@ public class ConfirmReservationFragment extends Fragment {
                     tv_wheel.setText(LoadReservItems.get("resWheel"));
                     tv_help.setText(LoadReservItems.get("resHelp"));
 
-                    System.out.println(LoadReservItems.get("resNum"));
+                    tv_reservDate.setText(LoadReservItems.get("resDate")+" 예약");
+                    tv_reservDepart.setText(LoadReservItems.get("resDepartures"));
+                    tv_reservArrival.setText(LoadReservItems.get("resArrivals"));
                 }
                 else{
                     tv_isReservation.setText("예약 사항 없음");

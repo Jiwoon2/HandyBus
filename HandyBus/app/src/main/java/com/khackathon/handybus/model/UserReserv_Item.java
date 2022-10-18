@@ -7,6 +7,7 @@ public class UserReserv_Item {
     String resNum;
     String resWheel;
     String resHelp;
+    String resDate;
 
     public void setResArrivals(String resArrivals) {
         this.resArrivals = resArrivals;
@@ -32,6 +33,10 @@ public class UserReserv_Item {
         this.resNum = resNum;
     }
 
+    public void setResDate(String resDate) {
+        this.resDate = resDate;
+    }
+
     public String getResArrivals() {
         return resArrivals;
     }
@@ -54,5 +59,9 @@ public class UserReserv_Item {
 
     public String getResWheel() {
         return resWheel;
+    }
+
+    public String getResDate() {
+        return resDate;
     }
 }

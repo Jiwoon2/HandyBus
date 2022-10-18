@@ -10,12 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.khackathon.handybus.R;
 
 public class BusLinkFragment extends Fragment {
 
     ImageView img;
+    ImageView img2;
+    ImageView img3;
+    LinearLayout link1;
+    LinearLayout link2;
+    LinearLayout link3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,12 +29,51 @@ public class BusLinkFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_bus_link, container, false);
 
         img= v.findViewById(R.id.img);
+        img2= v.findViewById(R.id.img2);
+        img3= v.findViewById(R.id.img3);
+        link1= v.findViewById(R.id.link1);
+        link2= v.findViewById(R.id.link2);
+        link3= v.findViewById(R.id.link3);
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //액티-> 바로 웹브라우저로 열기 --> 브라우저를 이용해 열어서 뒤로가기해도 이전 화면으로 돌아옴
-                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com/"));
+                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://yeyak.seoul.go.kr/web/search/selectPageListTotalSearch.do"));
+                startActivity(intent);
+            }
+        });
+        link1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://yeyak.seoul.go.kr/web/search/selectPageListTotalSearch.do"));
+                startActivity(intent);
+            }
+        });
+        img2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.seouldanurim.net/resev-info#bus"));
+                startActivity(intent);
+            }
+        });
+        link2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.seouldanurim.net/resev-info#bus"));
+                startActivity(intent);
+            }
+        });
+        img3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abletour.kr/reserve/res02.asp?scrID=0000000125&pageNum=3&subNum=2&ssubNum=1"));
+                startActivity(intent);
+            }
+        });
+        link3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.abletour.kr/reserve/res02.asp?scrID=0000000125&pageNum=3&subNum=2&ssubNum=1"));
                 startActivity(intent);
             }
         });

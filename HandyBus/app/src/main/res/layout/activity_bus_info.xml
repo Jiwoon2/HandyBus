@@ -229,7 +229,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#67B645"
-                android:textSize="45dp"
+                android:textSize="43sp"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"

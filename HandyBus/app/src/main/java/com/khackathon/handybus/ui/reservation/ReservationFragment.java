@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -47,8 +48,10 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -181,12 +184,16 @@ public class ReservationFragment extends Fragment {
                 userReservitem.setResNum(tv_num.getText().toString());
                 userReservitem.setResWheel(radio_wheel);
                 userReservitem.setResHelp(et_help.getText().toString());
+                userReservitem.setResDate(getDate());
 
                 mDatabase.child("User").child(userEmail.split("\\.")[0]).setValue(userReservitem);
 
                 //예약 정보 없애기
                 res_busNum.setText("");
                 et_help.setText("");
+
+                Toast toast=Toast.makeText(getContext(),"예약되었습니다",Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -276,6 +283,15 @@ public class ReservationFragment extends Fragment {
         return v;
     }
 
+    // 날짜
+    private String getDate() {
+        long now = System.currentTimeMillis(); //현재 시간
+        Date date = new Date(now); //date 형식으로 변경
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM/dd hh:mm"); //포맷설정
+        String getDate = dateFormat.format(date);
+
+        return getDate;
+    }
 
     private void showAlertDialogStation() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();

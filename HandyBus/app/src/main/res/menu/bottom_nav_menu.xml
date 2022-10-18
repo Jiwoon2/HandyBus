@@ -4,27 +4,27 @@
     <item
         android:id="@+id/navigation_search"
         android:icon="@drawable/menu_search"
-        android:title="버스 조회" />
+        android:title=" 버스조회(시내)" />
 
     <item
         android:id="@+id/navigation_reservation"
         android:icon="@drawable/menu_reserv"
-        android:title="예약" />
+        android:title="예약(시내)" />
 
     <item
         android:id="@+id/navigation_confirmReservation"
         android:icon="@drawable/menu_check"
-        android:title="예약 확인" />
+        android:title="예약 확인(시내)" />
 
     <item
         android:id="@+id/navigation_site"
         android:icon="@drawable/menu_site"
-        android:title="사이트" />
+        android:title="사이트(시외)" />
 
 
     <item
         android:id="@+id/navigation_board"
         android:icon="@drawable/menu_community"
-        android:title="커뮤니티" />
+        android:title="커뮤니티(시외)" />
 
 </menu>
