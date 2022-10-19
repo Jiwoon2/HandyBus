@@ -1,5 +1,6 @@
 package com.khackathon.handybus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,7 +12,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.khackathon.handybus.activity.LoginActivity;
 import com.khackathon.handybus.ui.confirmReservation.ConfirmReservationFragment;
 import com.khackathon.handybus.ui.reservation.ReservationFragment;
 import com.khackathon.handybus.ui.site.BusLinkFragment;
@@ -29,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     WriteBoardFragment writeBoardFragment;
 
     private FirebaseAuth mAuth = null;
+    private GoogleSignInClient mGoogleSignInClient;
     TextView main_name;
 
     @Override
@@ -52,7 +61,13 @@ public class MainActivity extends AppCompatActivity {
         main_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+                mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+
+                signOut();
             }
         });
 
@@ -87,6 +102,26 @@ public class MainActivity extends AppCompatActivity {
         //fragmentTransaction.add(R.id.content_layout, homeFragment ).commit();
 
     }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+    private void signOut() {
+        mAuth.signOut();
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        updateUI(null);
+                    }
+                });
+    }
+
+
 
     // 프래그먼트-> 프래그먼트 전환
     public void replaceFragment(Fragment fragment) {
