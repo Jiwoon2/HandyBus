@@ -147,11 +147,7 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                 for (DataSnapshot post : snapshot.getChildren()) {
-                    System.out.println(post.getValue() + "anjsep444");//왜 이건 코맨트만이지???
-                    System.out.println(post.getClass().getName() + "anjsep333");//전부 스트링 형태로 출력됨.
-
                     LoadCommentItems = (HashMap<String, String>) post.getValue();
-                    System.out.println(LoadCommentItems + "anjsep33355");//전부 스트링 형태로 출력됨.
                     CommentItem item = new CommentItem(LoadCommentItems.get("cmtUserName"), LoadCommentItems.get("cmtUserEmail"), LoadCommentItems.get("cmtDate"), LoadCommentItems.get("cmtContent"));
                     commentItems.add(item);
                 }

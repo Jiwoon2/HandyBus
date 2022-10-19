@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = null;
     private GoogleSignInClient mGoogleSignInClient;
     TextView main_name;
+    ImageView main_mypage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.nav_view);
         main_name = findViewById(R.id.main_name);
+        main_mypage= findViewById(R.id.main_mypage);
 
         searchFragment = new SearchFragment();
         reservationFragment= new ReservationFragment();
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         main_name.setText(mAuth.getCurrentUser().getDisplayName()+"님");
 
         //임시 로그아웃
-        main_name.setOnClickListener(new View.OnClickListener() {
+        main_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -103,13 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
     private void signOut() {
         mAuth.signOut();
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
@@ -121,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    private void updateUI(FirebaseUser user) {
+        if (user == null) {
+            finish();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
 
 
     // 프래그먼트-> 프래그먼트 전환
