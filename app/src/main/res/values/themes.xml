@@ -18,6 +18,10 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="ToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="RoundedCornersDialog" parent="@style/Theme.MaterialComponents.DayNight.Dialog">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -31,5 +35,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSurface</item>
         <!-- Customize your theme here. -->
         <item name="dialogCornerRadius">24dp</item>
+    </style>
+
+    <style name="ParticipationButton" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/handyBus_maincolor</item>
+        <item name="colorOnPrimary">@color/white</item>
     </style>
 </resources>

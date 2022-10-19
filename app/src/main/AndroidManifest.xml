@@ -26,9 +26,6 @@
             android:name="com.handy.handybus.activity.wbactivity.PostDetailActivity"
             android:exported="false" />
         <activity
-            android:name="com.handy.handybus.activity.wbactivity.PostActivity"
-            android:exported="false" />
-        <activity
             android:name="com.handy.handybus.ui.auth.LoginActivity"
             android:exported="true">
 

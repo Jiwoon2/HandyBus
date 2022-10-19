@@ -255,7 +255,7 @@
 
                 </LinearLayout>
 
-                <Space
+                <View
                     android:layout_width="0dp"
                     android:layout_height="32dp" />
 

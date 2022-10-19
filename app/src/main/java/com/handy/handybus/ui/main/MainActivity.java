@@ -12,11 +12,14 @@ import com.handy.handybus.ui.BaseActivity;
 import com.handy.handybus.R;
 import com.handy.handybus.databinding.ActivityMainBinding;
 import com.handy.handybus.ui.auth.LoginActivity;
+import com.handy.handybus.ui.board.PostFragment;
 import com.handy.handybus.ui.main.children.BusLinkFragment;
 import com.handy.handybus.ui.main.children.ConfirmReservationFragment;
 import com.handy.handybus.ui.main.children.ReservationFragment;
 import com.handy.handybus.ui.main.children.SearchFragment;
 import com.handy.handybus.ui.main.children.WriteBoardFragment;
+import com.handy.handybus.ui.mypage.MyPageFragment;
+import com.handy.handybus.ui.mypage.OtpVerificationFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -72,6 +75,15 @@ public class MainActivity extends BaseActivity {
             }
 
             return true;
+        });
+
+        binding.myPageButton.setOnClickListener(v -> {
+            if (getSupportFragmentManager().findFragmentByTag("MyPage") == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, new MyPageFragment(), "MyPage")
+                        .addToBackStack(null)
+                        .commit();
+            }
         });
     }
 

@@ -1,193 +1,151 @@
 package com.handy.handybus.ui.main.children;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.handy.handybus.R;
-import com.handy.handybus.activity.wbactivity.PostActivity;
-import com.handy.handybus.ui.adapter.wbadapter.WriteBoardAdapter;
-import com.handy.handybus.data.model.wbmodel.PostItem;
+import com.handy.handybus.data.model.Board;
+import com.handy.handybus.databinding.FragmentWriteBoardBinding;
+import com.handy.handybus.databinding.ItemBoardlistBinding;
+import com.handy.handybus.ui.board.PostDetailFragment;
+import com.handy.handybus.ui.board.PostFragment;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class WriteBoardFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private WriteBoardAdapter mAdapter;
-    private LinearLayoutManager mLayoutManager;
+    private FragmentWriteBoardBinding binding;
+    private WriteBoardViewModel viewModel;
 
-    private ArrayList<PostItem> PostingList;
-    ExtendedFloatingActionButton write_btn;
+    private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
 
-    Intent intent;
-
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mReference;
-    private ChildEventListener mChild;
-
-    PostItem item;
-
-    Button post_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_write_board, container, false);
+        binding = FragmentWriteBoardBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
 
-        write_btn= v.findViewById(R.id.write_btn);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        //서버에서 데이터 가져오기 -> 리사이클뷰 코드 전에 있어야 됨!!!
-        PostingList= new ArrayList<>();
-        //ArrayList에 값 추가하기
-//        PostingList.add(new PostItem("도봉순", "dkdkdk@kdkdkd.com","ee"));
-//        PostingList.add(new PostItem("김월매", "dddd@gmail.com","eew"));
+        viewModel = new ViewModelProvider(this).get(WriteBoardViewModel.class);
 
-        mDatabase = FirebaseDatabase.getInstance();
-
-        mReference = mDatabase.getReference("Board"); // 변경값을 확인할 child 이름
-
-
-        //한 번만 가져옴
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                PostingList.clear();
-                for (DataSnapshot post : snapshot.getChildren()) {
-                    PostItem item= post.getValue(PostItem.class);
-                    PostingList.add(item);
-                }
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
+        adapter.setOnItemClickListener(item -> {
+            if (getParentFragmentManager().findFragmentByTag("PostDetail") == null) {
+                getParentFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, PostDetailFragment.getInstance(item), "PostDetail")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
-        //바뀐 것만 가져옴
-//        mReference.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-//                item= snapshot.getValue(PostItem.class);
-//                PostingList.add(item);
-//                mAdapter.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//
-//                PostItem item= snapshot.getValue(PostItem.class); //이럼 하위에 추가되고..
-//
-//                PostingList.add(item);
-//
-//
-//                mAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//
-//        });
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL));
 
-
-        mRecyclerView = v.findViewById(R.id.container_boardList);
-        mRecyclerView.setHasFixedSize(true);//옵션
-        //Linear layout manager 사용
-        mLayoutManager = new LinearLayoutManager(v.getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        //어댑터 세팅
-        mAdapter = new WriteBoardAdapter(PostingList);
-        mRecyclerView.setAdapter(mAdapter);
-
-        //initDatabase();
-
-        //누르면 게시글 입력할 수 있는 창으로 이동
-        write_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent= new Intent(v.getContext(), PostActivity.class);
-                startActivity(intent);
+        binding.writeBtn.setOnClickListener(v -> {
+            if (getParentFragmentManager().findFragmentByTag("Post") == null) {
+                getParentFragmentManager().beginTransaction()
+                        .add(R.id.fragment_container, new PostFragment(), "Post")
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
-        return v;
+        viewModel.boards.observe(getViewLifecycleOwner(), items -> adapter.submitList(items));
     }
 
 
-    //    private void initDatabase() {
-//
-//        mDatabase = FirebaseDatabase.getInstance();
-//
-//        mReference = mDatabase.getReference("Board");
-//        //mReference.child("log").setValue("check");
-//
-//        mChild = new ChildEventListener() {
-//
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//        mReference.addChildEventListener(mChild);
-//    }
-//
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        mReference.removeEventListener(mChild);
-//    }
+    private static class RecyclerViewAdapter extends ListAdapter<Board, RecyclerViewAdapter.ItemViewHolder> {
 
+        private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy. MM. dd. HH:mm", Locale.KOREA);
+        private Consumer<Board> onItemClickListener;
+
+        protected RecyclerViewAdapter() {
+            super(new DiffUtil.ItemCallback<Board>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull Board oldItem, @NonNull Board newItem) {
+                    return TextUtils.equals(oldItem.getDocumentId(), newItem.getDocumentId());
+                }
+
+                @Override
+                public boolean areContentsTheSame(@NonNull Board oldItem, @NonNull Board newItem) {
+                    if (oldItem.getParticipants().size() != newItem.getParticipants().size()) {
+                        return false;
+                    }
+
+                    for (String participant : oldItem.getParticipants()) {
+                        if (!newItem.getParticipants().contains(participant)) {
+                            return false;
+                        }
+                    }
+
+                    return TextUtils.equals(oldItem.getTitle(), newItem.getTitle()) &&
+                            TextUtils.equals(oldItem.getMessage(), newItem.getMessage()) &&
+                            TextUtils.equals(oldItem.getName(), newItem.getName());
+                }
+
+                @Override
+                public Object getChangePayload(@NonNull Board oldItem, @NonNull Board newItem) {
+                    return new Object();
+                }
+            });
+        }
+
+        public void setOnItemClickListener(Consumer<Board> onItemClickListener) {
+            this.onItemClickListener = onItemClickListener;
+        }
+
+        @NonNull
+        @Override
+        public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            ItemBoardlistBinding binding = ItemBoardlistBinding.inflate(inflater, parent, false);
+            return new ItemViewHolder(binding);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+            Board item = getItem(position);
+            ItemBoardlistBinding binding = holder.binding;
+
+            binding.tvBoardNickName.setText(item.getName());
+            binding.tvBoardJoinCnt.setText(String.valueOf(item.getParticipants().size()));
+            binding.tvBoardTitle.setText(item.getTitle());
+            binding.tvBoardContent.setText(item.getMessage());
+            binding.tvBoardDate.setText(dateFormat.format(item.getTimestamp()));
+
+            binding.getRoot().setOnClickListener(v -> {
+                if (onItemClickListener != null) {
+                    onItemClickListener.accept(item);
+                }
+            });
+        }
+
+        static class ItemViewHolder extends RecyclerView.ViewHolder {
+            public ItemBoardlistBinding binding;
+
+            public ItemViewHolder(ItemBoardlistBinding binding) {
+                super(binding.getRoot());
+                this.binding = binding;
+            }
+        }
+    }
 }

@@ -2,6 +2,9 @@ package com.handy.handybus.data.model;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
 
 @IgnoreExtraProperties
 public class Profile {
@@ -14,6 +17,8 @@ public class Profile {
 
     @Exclude
     private String name;
+
+    private long timestamp = new Date().getTime();
 
 
     public Profile() {
@@ -67,5 +72,13 @@ public class Profile {
     @Exclude
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
