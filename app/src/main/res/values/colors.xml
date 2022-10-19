@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="handyBus_maincolor">#676CFB</color>
+
+    <color name="high_emphasis">#de000000</color>
+    <color name="medium_emphasis">#99000000</color>
+    <color name="disabled">#61000000</color>
+    <color name="divider">#1F000000</color>
 </resources>
