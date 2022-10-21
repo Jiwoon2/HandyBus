@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.handy.handybus">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_handybus"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_handybus_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HandyBus"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="com.handy.handybus.ui.search.BusListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.handy.handybus.ui.search.BusInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.handy.handybus.activity.ReserveActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.handy.handybus.activity.wbactivity.PostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.handy.handybus.ui.auth.LoginActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.handy.handybus.ui.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.handy.handybus.ui.auth.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.handy.handybus.ui.auth.ForgotPasswordActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
