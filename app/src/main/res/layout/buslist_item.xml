@@ -5,7 +5,7 @@
 
         <variable
             name="buslistItem"
-            type="com.khackathon.handybus.model.BusList_Item" />
+            type="com.handy.handybus.model.BusList_Item" />
     </data>
 
 

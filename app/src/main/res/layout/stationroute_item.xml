@@ -4,7 +4,7 @@
     <data>
         <variable
             name="stRouteitem"
-            type="com.khackathon.handybus.model.StationRoute_Item" />
+            type="com.handy.handybus.model.StationRoute_Item" />
     </data>
 
 

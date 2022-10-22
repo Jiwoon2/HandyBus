@@ -4,7 +4,7 @@
     <data>
         <variable
             name="busstopItem"
-            type="com.khackathon.handybus.model.BusStop_Item" />
+            type="com.handy.handybus.model.BusStop_Item" />
     </data>
 
 

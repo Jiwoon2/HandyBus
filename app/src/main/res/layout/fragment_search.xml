@@ -6,7 +6,7 @@
     <data>
         <variable
             name="busstopviewmodel"
-            type="com.khackathon.handybus.ui.search.BusStopViewmodel" />
+            type="com.handy.handybus.ui.search.BusStopViewmodel" />
 
 <!--        <variable-->
 <!--            name="serachfragment"-->
@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.khackathon.bus_mvvm.view.SearchFragment">
+    tools:context="com.handy.bus_mvvm.view.SearchFragment">
 
 <!--    <Button-->
 <!--        android:id="@+id/btnn"-->
