@@ -4,9 +4,9 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.handy.handybus.model.BusArrInfoAPI;
-import com.handy.handybus.model.BusList_Item;
-import com.handy.handybus.model.BusListRepository;
+import com.handy.handybus.data.source.BusArrInfoAPI;
+import com.handy.handybus.data.model.BusList_Item;
+import com.handy.handybus.data.repository.BusListRepository;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

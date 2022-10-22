@@ -2,258 +2,222 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable
-            name="busRouteInfo"
-            type="com.handy.handybus.viewmodel.RouteInfoViewmodel" />
 
         <variable
             name="item"
-            type="com.handy.handybus.model.RouteInfo_Item" />
-
-        <variable
-            name="stRouteviewmodel"
-            type="com.handy.handybus.viewmodel.StationRouteViewmodel" />
-        <variable
-            name="stRouteItem"
-            type="com.handy.handybus.model.StationRoute_Item" />
+            type="com.handy.handybus.data.model.RouteInfo_Item" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="9"
-        tools:context=".activity.BusInfo">
+        tools:context=".ui.search.BusInfoActivity">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true"
+            app:liftOnScrollTargetViewId="@id/scroll_view">
 
-<!--            <Button-->
-<!--                android:id="@+id/booking_btn"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/reserbtn"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16dp"-->
-<!--                android:text="예약하기"/>-->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="?attr/homeAsUpIndicator" />
 
-        </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_weight="2.5"
-            android:orientation="vertical">
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textSize="20dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:layout_marginBottom="5dp"-->
-<!--                    android:text="노선 번호" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_busRouteNm"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:textColor="#67B645"-->
-<!--                    android:textSize="15dp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:layout_marginBottom="5dp"-->
-<!--                    android:text="@{item.busRouteNm}" />-->
-<!--            </LinearLayout>-->
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:textColor="@color/black"
-                    android:layout_marginBottom="5dp"
-                    android:text="운행 정보" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-                    <!--                <TextView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:text="기점" />-->
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tv_stStationNm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:text="@{item.BusStStationNm}" />
+                        android:text="운행 정보"
+                        android:textAppearance="?textAppearanceHeadline6"
+                        android:textColor="@color/black" />
 
-                    <TextView
-                        android:gravity="center"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:text=" &lt; - &gt; " />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+                        <!--                <TextView-->
+                        <!--                    android:layout_width="wrap_content"-->
+                        <!--                    android:layout_height="wrap_content"-->
+                        <!--                    android:text="기점" />-->
 
-                    <!--                <TextView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:text="종점" />-->
+                        <TextView
+                            android:id="@+id/tv_stStationNm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.BusStStationNm}"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="@color/medium_emphasis"
+                            tools:text="쉐라톤서울디큐브시티호텔" />
 
-                    <TextView
-                        android:id="@+id/tv_edStationNm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:text="@{item.busEdStationNm}" />
+                        <TextView
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=" &lt; - &gt; "
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="@color/medium_emphasis" />
+
+                        <!--                <TextView-->
+                        <!--                    android:layout_width="wrap_content"-->
+                        <!--                    android:layout_height="wrap_content"-->
+                        <!--                    android:text="종점" />-->
+
+                        <TextView
+                            android:id="@+id/tv_edStationNm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.busEdStationNm}"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="@color/medium_emphasis"
+                            tools:text="인천공항" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="금일첫차시간"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_firstBusTm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:text="@{item.busFirstBusTm}"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="@color/medium_emphasis"
+                                tools:text="05시 30분" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="금일막차시간"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_lastBusTm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:text="@{item.busLastBusTm}"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                                android:textColor="@color/medium_emphasis"
+                                tools:text="18시 40분" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/dividerVertical" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:padding="16dp">
 
-                    <LinearLayout
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="배차간격"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_term"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="@{item.busTerm}"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@color/medium_emphasis"
+                        tools:text="300분" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/dividerVertical" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:text="경유 정류소"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="금일첫차시간"
-                            android:layout_marginBottom="5dp"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/tv_firstBusTm"
-                            android:layout_marginLeft="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{item.busFirstBusTm}" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="금일막차시간"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:id="@+id/tv_lastBusTm"
-                            android:layout_marginLeft="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{item.busLastBusTm}" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="#CCCCCC"/>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="배차간격"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/tv_term"
-                            android:layout_marginLeft="10dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{item.busTerm}" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="#CCCCCC"/>
-
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
+        </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_busRouteNm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#67B645"
-                android:textSize="43sp"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:text="@{item.busRouteNm}" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="#CCCCCC"/>
-
-        </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/container_stRoute"/>
-
-    </LinearLayout>
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

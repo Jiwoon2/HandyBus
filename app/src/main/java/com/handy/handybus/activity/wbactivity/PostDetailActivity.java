@@ -24,9 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.handy.handybus.R;
-import com.handy.handybus.adapter.wbadapter.CommentAdapter;
-import com.handy.handybus.model.wbmodel.CommentItem;
-import com.handy.handybus.model.wbmodel.PostItem;
+import com.handy.handybus.ui.adapter.wbadapter.CommentAdapter;
+import com.handy.handybus.data.model.wbmodel.CommentItem;
+import com.handy.handybus.data.model.wbmodel.PostItem;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -145,7 +145,11 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                 for (DataSnapshot post : snapshot.getChildren()) {
+                    System.out.println(post.getValue() + "anjsep444");//왜 이건 코맨트만이지???
+                    System.out.println(post.getClass().getName() + "anjsep333");//전부 스트링 형태로 출력됨.
+
                     LoadCommentItems = (HashMap<String, String>) post.getValue();
+                    System.out.println(LoadCommentItems + "anjsep33355");//전부 스트링 형태로 출력됨.
                     CommentItem item = new CommentItem(LoadCommentItems.get("cmtUserName"), LoadCommentItems.get("cmtUserEmail"), LoadCommentItems.get("cmtDate"), LoadCommentItems.get("cmtContent"));
                     commentItems.add(item);
                 }
