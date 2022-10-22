@@ -6,7 +6,7 @@
     <data>
         <variable
             name="buslistviewmodel"
-            type="com.khackathon.handybus.viewmodel.BusListViewmodel" />
+            type="com.handy.handybus.viewmodel.BusListViewmodel" />
     </data>
 
 <LinearLayout

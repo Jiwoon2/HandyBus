@@ -5,18 +5,18 @@
     <data>
         <variable
             name="busRouteInfo"
-            type="com.khackathon.handybus.viewmodel.RouteInfoViewmodel" />
+            type="com.handy.handybus.viewmodel.RouteInfoViewmodel" />
 
         <variable
             name="item"
-            type="com.khackathon.handybus.model.RouteInfo_Item" />
+            type="com.handy.handybus.model.RouteInfo_Item" />
 
         <variable
             name="stRouteviewmodel"
-            type="com.khackathon.handybus.viewmodel.StationRouteViewmodel" />
+            type="com.handy.handybus.viewmodel.StationRouteViewmodel" />
         <variable
             name="stRouteItem"
-            type="com.khackathon.handybus.model.StationRoute_Item" />
+            type="com.handy.handybus.model.StationRoute_Item" />
     </data>
 
     <LinearLayout
