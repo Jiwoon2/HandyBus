@@ -4,9 +4,9 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
-import com.handy.handybus.model.RouteInfoAPI;
-import com.handy.handybus.model.RouteInfo_Item;
-import com.handy.handybus.model.RouteInfoRepository;
+import com.handy.handybus.data.source.RouteInfoAPI;
+import com.handy.handybus.data.model.RouteInfo_Item;
+import com.handy.handybus.data.repository.RouteInfoRepository;
 
 import java.io.UnsupportedEncodingException;
 

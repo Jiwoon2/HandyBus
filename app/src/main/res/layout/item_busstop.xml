@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="busstopItem"
+            type="com.handy.handybus.data.model.BusStop_Item" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/item_busStop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/busStName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{busstopItem.busStName}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                tools:text="@tools:sample/lorem" />
+
+            <TextView
+                android:id="@+id/busStID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{busstopItem.busStID}"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/medium_emphasis"
+                tools:text="@tools:sample/lorem" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</layout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:orientation="vertical">-->
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/item_busStop"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:paddingBottom="10dp">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/busStName"-->
+    <!--            android:textSize="20dp"-->
+    <!--            android:textColor="#000000"/>-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/busStID"-->
+    <!--            android:textSize="16dp"-->
+    <!--            android:textColor="#666666"/>-->
+
+    <!--        <View-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="1dp"-->
+    <!--            android:background="#CCCCCC"-->
+    <!--            android:layout_marginTop="10dp" />-->
+    <!--    </LinearLayout>-->
+
+    <!--</LinearLayout>-->
