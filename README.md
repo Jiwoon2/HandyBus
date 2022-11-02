@@ -1,57 +1,26 @@
 ![Header](https://capsule-render.vercel.app/api?type=waving&text=HandyBus&color=gradient&height=200&section=header)
 # HandyBus
-> 간략한 프로젝트 소개 문구를 작성합니다.
+> 휠체어 장애인들의 열악한 시내/시외버스 이동 편의성 개선을 위한 예약 어플리케이션입니다.
 
-<img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"/> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=white"/>
+<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=white"/>
+<br><br>🏆 2022 K-해커톤 10기 장려상(소프트웨어교육혁식센터 이사장상)
 
-한 두 문단으로 프로젝트 소개 글을 작성합니다.
+## 제공 기능
+- 저상버스 승/하차 정류장 예약 기능 제공
+- 공공기관, 영리기관의 시외버스 예약을 돕는 커뮤니티 기능 제공
+- 저상버스와 리프트 버스만의 구별된 정보 제공
 
-![](../header.png)
+## 사용자 UI
 
-## 설치 방법
+<img width="80%" src="https://user-images.githubusercontent.com/52107658/199498344-9731ad64-d7be-4b1a-86d7-5e5f9fd8d058.png"/>
 
-안드로이드:
-```sh
-npm install my-crazy-module --save
+## 개발 환경
+
 ```
-
-## 사용 예제
-
-스크린 샷과 코드 예제를 통해 사용 방법을 자세히 설명합니다.
-
-_더 많은 예제와 사용법은 [Wiki][wiki]를 참고하세요._
-
-## 개발 환경 설정
-
-모든 개발 의존성 설치 방법과 자동 테스트 슈트 실행 방법을 운영체제 별로 작성합니다.
-
-```sh
-make install
-npm test
+compileSdkVersion 33
+buildToolsVersion "30.0.3"
 ```
-
-## 업데이트 내역
-
-* 0.2.1
-    * 수정: 문서 업데이트 (모듈 코드 동일)
-* 0.2.0
-    * 수정: `setDefaultXYZ()` 메서드 제거
-    * 추가: `init()` 메서드 추가
-* 0.1.1
-    * 버그 수정: `baz()` 메서드 호출 시 부팅되지 않는 현상 (@컨트리뷰터 감사합니다!)
-* 0.1.0
-    * 첫 출시
-    * 수정: `foo()` 메서드 네이밍을 `bar()`로 수정
-* 0.0.1
-    * 작업 진행 중
-
-## 정보
-
-이름 – [@트위터 주소](https://twitter.com/dbader_org) – 이메일주소@example.com
-
-XYZ 라이센스를 준수하며 ``LICENSE``에서 자세한 정보를 확인할 수 있습니다.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+에뮬레이터: API 31
 
 ## 기여 방법
 
