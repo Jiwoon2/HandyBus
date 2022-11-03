@@ -3,7 +3,7 @@
 > 휠체어 장애인들의 열악한 시내/시외버스 이동 편의성 개선을 위한 예약 어플리케이션입니다.
 
 <img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=white"/>
-<br><br>🏆 2022 K-해커톤 10기 장려상(소프트웨어교육혁식센터 이사장상)
+<br><br>🏆 2022 K-해커톤 10기 장려상(소프트웨어교육혁신센터 이사장상)
 
 ## 제공 기능
 - 저상버스 승/하차 정류장 예약 기능 제공
