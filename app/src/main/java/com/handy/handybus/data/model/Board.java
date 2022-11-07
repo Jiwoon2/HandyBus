@@ -25,6 +25,8 @@ public class Board implements Parcelable {
 
     private Date timestamp = new Date();
 
+    // 신고하기 받은 횟수
+    private int numReports = 0;
 
     public Board() {
     }
@@ -37,6 +39,7 @@ public class Board implements Parcelable {
         name = in.readString();
         message = in.readString();
         participants = in.createStringArrayList();
+        numReports = in.readInt();
     }
 
     @Override
@@ -48,6 +51,7 @@ public class Board implements Parcelable {
         dest.writeString(name);
         dest.writeString(message);
         dest.writeStringList(participants);
+        dest.writeInt(numReports);
     }
 
     @Override
@@ -129,5 +133,12 @@ public class Board implements Parcelable {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getNumReports() {
+        return numReports;
+    }
+    public void setNumReports(int numReports) {
+        this.numReports = numReports;
     }
 }

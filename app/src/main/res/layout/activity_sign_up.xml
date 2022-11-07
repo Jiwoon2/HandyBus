@@ -222,39 +222,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:gravity="center_vertical">
-
-                    <CheckBox
-                        android:id="@+id/marketing_checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:id="@+id/marketing_link_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-                            android:paddingVertical="12dp"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="24dp"
-                            android:text="마케팅 정보 수신 동의"
-                            android:textAppearance="?attr/textAppearanceBody2" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
                 <View
                     android:layout_width="0dp"
                     android:layout_height="32dp" />

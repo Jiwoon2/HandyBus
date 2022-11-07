@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,20 +18,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
 import com.handy.handybus.R;
 import com.handy.handybus.data.model.Board;
+import com.handy.handybus.data.model.Profile;
 import com.handy.handybus.databinding.FragmentWriteBoardBinding;
 import com.handy.handybus.databinding.ItemBoardlistBinding;
 import com.handy.handybus.ui.board.PostDetailFragment;
 import com.handy.handybus.ui.board.PostFragment;
+import com.handy.handybus.ui.main.MainViewModel;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Locale;
 
 public class WriteBoardFragment extends Fragment {
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
+    private final FirebaseDatabase db = FirebaseDatabase.getInstance();
 
     private FragmentWriteBoardBinding binding;
     private WriteBoardViewModel viewModel;
+
+    private MainViewModel mainViewModel;
+    private Profile profile = null;
 
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
 
@@ -38,6 +52,12 @@ public class WriteBoardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mainViewModel.profile.observe(getViewLifecycleOwner(), (profile) -> {
+            if (profile == null) return;
+            this.profile = profile;
+        });
+
         binding = FragmentWriteBoardBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -61,6 +81,13 @@ public class WriteBoardFragment extends Fragment {
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL));
 
         binding.writeBtn.setOnClickListener(v -> {
+
+            if ( profile != null && profile.getBanned() != 0 ) {
+                Toast.makeText(requireActivity().getApplication(),
+                        "글쓰기가 차단 되었습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (getParentFragmentManager().findFragmentByTag("Post") == null) {
                 getParentFragmentManager().beginTransaction()
                         .add(R.id.fragment_container, new PostFragment(), "Post")

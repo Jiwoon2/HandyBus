@@ -20,6 +20,8 @@ public class Message {
 
     private Date timestamp = new Date();
 
+    // 신고하기 받은 횟수
+    private int numReports = 0;
 
     public Message() {
     }
@@ -86,5 +88,12 @@ public class Message {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getNumReports() {
+        return numReports;
+    }
+    public void setNumReports(int numReports) {
+        this.numReports = numReports;
     }
 }

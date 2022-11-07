@@ -17,6 +17,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.handy.handybus.data.model.Board;
 import com.handy.handybus.data.model.Message;
 import com.handy.handybus.databinding.FragmentPostDetailBinding;
@@ -28,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
 
 public class PostDetailFragment extends Fragment {
 
@@ -45,7 +50,7 @@ public class PostDetailFragment extends Fragment {
     private FragmentPostDetailBinding binding;
     private PostDetailViewModel viewModel;
     private BoardAdapter boardAdapter;
-    private final MessageAdapter messageAdapter = new MessageAdapter();
+    private MessageAdapter messageAdapter;
 
     private Message parentMessage;
 
@@ -62,6 +67,9 @@ public class PostDetailFragment extends Fragment {
         }
     };
 
+    public PostDetailFragment() {
+        messageAdapter = new MessageAdapter(this);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,7 +108,7 @@ public class PostDetailFragment extends Fragment {
 
         binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
 
-        boardAdapter = new BoardAdapter(viewModel.getMyUid());
+        boardAdapter = new BoardAdapter(viewModel.getMyUid(), this);
         boardAdapter.setOnParticipateClickListener((ignore) -> viewModel.toggleParticipation());
 
         messageAdapter.setOnReReplyButtonClickListener((parentMessage) -> {
@@ -133,13 +141,17 @@ public class PostDetailFragment extends Fragment {
     }
 
     private static class BoardAdapter extends ListAdapter<Board, BoardAdapter.ItemViewHolder> {
+        private final FirebaseDatabase db = FirebaseDatabase.getInstance();
+        private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
 
         private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy. MM. dd. HH:mm", Locale.KOREA);
         private final String myUid;
 
         private Consumer<Void> onParticipateClickListener;
 
-        public BoardAdapter(String myUid) {
+        private PostDetailFragment postDetailFragment = null;
+
+        public BoardAdapter(String myUid, PostDetailFragment postDetailFragment) {
             super(new DiffUtil.ItemCallback<Board>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Board oldItem, @NonNull Board newItem) {
@@ -170,6 +182,7 @@ public class PostDetailFragment extends Fragment {
             });
 
             this.myUid = myUid;
+            this.postDetailFragment = postDetailFragment;
         }
 
         public void setOnParticipateClickListener(Consumer<Void> onParticipateClickListener) {
@@ -207,6 +220,18 @@ public class PostDetailFragment extends Fragment {
                     onParticipateClickListener.accept(null);
                 }
             });
+
+            binding.reportButton.setOnClickListener(v -> {
+                if (onParticipateClickListener != null) {
+                    Board b = postDetailFragment.board;
+                    int n = b.getNumReports() + 1;
+                    fireStore.collection("Board").document(b.getDocumentId()).update("numReports", n);
+                    b.setNumReports(n);
+                    if ( n >= 5 ) {
+                        db.getReference().child("Profiles").child(b.getUid()).child("banned").setValue(1);
+                    }
+                }
+            });
         }
 
         static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -220,12 +245,15 @@ public class PostDetailFragment extends Fragment {
     }
 
     private static class MessageAdapter extends ListAdapter<Message, RecyclerView.ViewHolder> {
+        private final FirebaseDatabase db = FirebaseDatabase.getInstance();
+        private final FirebaseFirestore fireStore = FirebaseFirestore.getInstance();
 
         private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy. MM. dd. HH:mm", Locale.KOREA);
         private String parentMessageDocumentId;
         private Consumer<Message> onReReplyButtonClickListener;
+        private PostDetailFragment postDetailFragment;
 
-        public MessageAdapter() {
+        public MessageAdapter(PostDetailFragment postDetailFragment) {
             super(new DiffUtil.ItemCallback<Message>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Message oldItem, @NonNull Message newItem) {
@@ -244,6 +272,8 @@ public class PostDetailFragment extends Fragment {
                     return new Object();
                 }
             });
+
+            this.postDetailFragment = postDetailFragment;
         }
 
         @Override
@@ -362,6 +392,16 @@ public class PostDetailFragment extends Fragment {
 
                     if (onReReplyButtonClickListener != null) {
                         onReReplyButtonClickListener.accept(item);
+                    }
+                });
+                binding.reportButton.setOnClickListener(v -> {
+                    Board b = postDetailFragment.board;
+                    String rootDocId = b.getDocumentId();
+                    int n = item.getNumReports() + 1;
+                    fireStore.collection("Board").document(rootDocId).collection("Messages").document(item.getDocumentId()).update("numReports", n);
+                    item.setNumReports(n);
+                    if ( n >= 5 ) {
+                        db.getReference().child("Profiles").child(item.getUid()).child("banned").setValue(1);
                     }
                 });
             } else if (holder instanceof ReReplyItemViewHolder) {

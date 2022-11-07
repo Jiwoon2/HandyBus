@@ -20,6 +20,8 @@ public class Profile {
 
     private long timestamp = new Date().getTime();
 
+    // 차단 여부 플래그: 차단 = 1
+    private int banned = 0;
 
     public Profile() {
     }
@@ -28,6 +30,7 @@ public class Profile {
         this.phoneNumber = phoneNumber;
         this.birth = birth;
         this.gender = gender;
+        this.banned = 0;
     }
 
     public String getPhoneNumber() {
@@ -77,8 +80,14 @@ public class Profile {
     public long getTimestamp() {
         return timestamp;
     }
-
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getBanned() {
+        return banned;
+    }
+    public void setBanned(int banned) {
+        this.banned = banned;
     }
 }
