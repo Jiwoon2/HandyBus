@@ -429,6 +429,13 @@ public class PostDetailFragment extends Fragment {
 
                     fireStore.collection("Board").document(rootDocId).collection("Messages").document(item.getDocumentId()).update("whoReport", FieldValue.arrayUnion(item.getUid()));
 
+                    //신고한 사람목록에 내가 들어가 있으면 해당 글 안보이도록
+                    if(item.getWhoReport().contains(item.getUid())){
+                        binding.tvBoardNickName.setText("");
+                        binding.tvBoardContent.setText("신고하였습니다");
+                        binding.tvBoardDate.setText(dateFormat.format(item.getTimestamp()));
+                    }
+
                 });
             } else if (holder instanceof ReReplyItemViewHolder) {
                 ItemBoardDetailRereplyBinding binding = ((ReReplyItemViewHolder) holder).binding;
@@ -437,6 +444,9 @@ public class PostDetailFragment extends Fragment {
                 binding.tvBoardContent.setText(item.getMessage());
                 binding.tvBoardDate.setText(dateFormat.format(item.getTimestamp()));
             }
+
+
+
         }
 
         static class ReplyItemViewHolder extends RecyclerView.ViewHolder {

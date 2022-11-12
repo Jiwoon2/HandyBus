@@ -2,6 +2,7 @@ package com.handy.handybus.data.model;
 
 import com.google.firebase.firestore.DocumentId;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Message {
@@ -22,6 +23,9 @@ public class Message {
 
     // 신고하기 받은 횟수
     private int numReports = 0;
+
+    //신고한 사람의 목록
+    private ArrayList<String> whoReport = new ArrayList<>();
 
     public Message() {
     }
@@ -96,4 +100,13 @@ public class Message {
     public void setNumReports(int numReports) {
         this.numReports = numReports;
     }
+
+    public ArrayList<String> getWhoReport() {
+        return whoReport;
+    }
+
+    public void setWhoReport(ArrayList<String> whoReport) {
+        this.whoReport = whoReport;
+    }
+
 }
