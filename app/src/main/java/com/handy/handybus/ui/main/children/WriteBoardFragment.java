@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -105,6 +106,9 @@ public class WriteBoardFragment extends Fragment {
         private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy. MM. dd. HH:mm", Locale.KOREA);
         private Consumer<Board> onItemClickListener;
 
+        public FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+        public String myUid = mAuth.getUid();
+
         protected RecyclerViewAdapter() {
             super(new DiffUtil.ItemCallback<Board>() {
                 @Override
@@ -164,6 +168,14 @@ public class WriteBoardFragment extends Fragment {
                     onItemClickListener.accept(item);
                 }
             });
+
+            //신고한 사람목록에 내가 들어가 있으면 해당 글 안보이도록
+            if(item.getWhoReport().contains(myUid)){
+                binding.tvBoardNickName.setText("");
+                binding.tvBoardJoinCnt.setText(String.valueOf(""));
+                binding.tvBoardTitle.setText("");
+                binding.tvBoardContent.setText("신고하였습니다");
+            }
         }
 
         static class ItemViewHolder extends RecyclerView.ViewHolder {

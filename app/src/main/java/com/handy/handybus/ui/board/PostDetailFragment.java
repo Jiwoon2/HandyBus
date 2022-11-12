@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -227,11 +228,31 @@ public class PostDetailFragment extends Fragment {
                     int n = b.getNumReports() + 1;
                     fireStore.collection("Board").document(b.getDocumentId()).update("numReports", n);
                     b.setNumReports(n);
-                    if ( n >= 5 ) {
+                    if (n >= 5) {
                         db.getReference().child("Profiles").child(b.getUid()).child("banned").setValue(1);
                     }
+                    fireStore.collection("Board").document(b.getDocumentId()).update("whoReport", FieldValue.arrayUnion(myUid));
+
+                    Toast.makeText(postDetailFragment.getActivity(),
+                            "신고하였습니다.", Toast.LENGTH_SHORT).show();
+
                 }
+
+                //사용하면 밑에거 적용안됨
+//                binding.tvBoardNickName.setText("");
+//                binding.tvBoardJoinCnt.setText(String.valueOf(""));
+//                binding.tvBoardTitle.setText("");
+//                binding.tvBoardContent.setText("신고하였습니다");
+
             });
+
+            //신고한 사람목록에 내가 들어가 있으면 해당 글 안보이도록
+            if(item.getWhoReport().contains(myUid)){
+                binding.tvBoardNickName.setText("");
+                binding.tvBoardJoinCnt.setText("");
+                binding.tvBoardTitle.setText("");
+                binding.tvBoardContent.setText("신고하였습니다");
+            }
         }
 
         static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -400,9 +421,14 @@ public class PostDetailFragment extends Fragment {
                     int n = item.getNumReports() + 1;
                     fireStore.collection("Board").document(rootDocId).collection("Messages").document(item.getDocumentId()).update("numReports", n);
                     item.setNumReports(n);
-                    if ( n >= 5 ) {
+                    if (n >= 5) {
                         db.getReference().child("Profiles").child(item.getUid()).child("banned").setValue(1);
                     }
+                    Toast.makeText(postDetailFragment.getActivity(),
+                            "신고하였습니다.", Toast.LENGTH_SHORT).show();
+
+                    fireStore.collection("Board").document(rootDocId).collection("Messages").document(item.getDocumentId()).update("whoReport", FieldValue.arrayUnion(item.getUid()));
+
                 });
             } else if (holder instanceof ReReplyItemViewHolder) {
                 ItemBoardDetailRereplyBinding binding = ((ReReplyItemViewHolder) holder).binding;

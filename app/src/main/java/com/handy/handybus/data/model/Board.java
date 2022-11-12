@@ -28,6 +28,9 @@ public class Board implements Parcelable {
     // 신고하기 받은 횟수
     private int numReports = 0;
 
+    //신고한 사람의 목록
+    private ArrayList<String> whoReport = new ArrayList<>();
+
     public Board() {
     }
 
@@ -40,6 +43,7 @@ public class Board implements Parcelable {
         message = in.readString();
         participants = in.createStringArrayList();
         numReports = in.readInt();
+        whoReport = in.createStringArrayList();
     }
 
     @Override
@@ -52,6 +56,7 @@ public class Board implements Parcelable {
         dest.writeString(message);
         dest.writeStringList(participants);
         dest.writeInt(numReports);
+        dest.writeStringList(whoReport);
     }
 
     @Override
@@ -140,5 +145,13 @@ public class Board implements Parcelable {
     }
     public void setNumReports(int numReports) {
         this.numReports = numReports;
+    }
+
+    public ArrayList<String> getWhoReport() {
+        return whoReport;
+    }
+
+    public void setWhoReport(ArrayList<String> whoReport) {
+        this.whoReport = whoReport;
     }
 }
