@@ -22,8 +22,8 @@ public class PostDetailViewModel extends ViewModel {
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
     private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-    private final MutableLiveData<Board> _board;
-    public final LiveData<Board> board;
+    private final MutableLiveData<Board> _board = new MutableLiveData<>();
+    public final LiveData<Board> board=_board;
     private final ListenerRegistration boardListenerRegistration;
 
     private final MutableLiveData<List<Message>> _messages = new MutableLiveData<>();
@@ -33,9 +33,6 @@ public class PostDetailViewModel extends ViewModel {
 
     public PostDetailViewModel(Board board) {
         this.__board = board;
-
-        _board = new MutableLiveData<>(board);
-        this.board = _board;
 
         boardListenerRegistration = firestore.collection("Board").document(board.getDocumentId())
                 .addSnapshotListener((value, error) -> {

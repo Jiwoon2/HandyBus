@@ -169,10 +169,11 @@ public class WriteBoardFragment extends Fragment {
                 }
             });
 
+
             //신고한 사람목록에 내가 들어가 있으면 해당 글 안보이도록
             if(item.getWhoReport().contains(myUid)){
                 binding.tvBoardNickName.setText("");
-                binding.tvBoardJoinCnt.setText(String.valueOf(""));
+                binding.tvBoardJoinCnt.setText("");
                 binding.tvBoardTitle.setText("");
                 binding.tvBoardContent.setText("신고하였습니다");
             }

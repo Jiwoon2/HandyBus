@@ -238,11 +238,12 @@ public class PostDetailFragment extends Fragment {
 
                 }
 
-                //사용하면 밑에거 적용안됨
-//                binding.tvBoardNickName.setText("");
-//                binding.tvBoardJoinCnt.setText(String.valueOf(""));
-//                binding.tvBoardTitle.setText("");
-//                binding.tvBoardContent.setText("신고하였습니다");
+                //즉시 숨김
+                binding.tvBoardNickName.setText("");
+                binding.tvBoardJoinCnt.setText(String.valueOf(""));
+                binding.tvBoardTitle.setText("");
+                binding.tvBoardContent.setText("신고하였습니다");
+
 
             });
 
@@ -429,14 +430,18 @@ public class PostDetailFragment extends Fragment {
 
                     fireStore.collection("Board").document(rootDocId).collection("Messages").document(item.getDocumentId()).update("whoReport", FieldValue.arrayUnion(item.getUid()));
 
-                    //신고한 사람목록에 내가 들어가 있으면 해당 글 안보이도록
-                    if(item.getWhoReport().contains(item.getUid())){
-                        binding.tvBoardNickName.setText("");
-                        binding.tvBoardContent.setText("신고하였습니다");
-                        binding.tvBoardDate.setText(dateFormat.format(item.getTimestamp()));
-                    }
+                    //즉시 숨김
+                    binding.tvBoardNickName.setText("");
+                    binding.tvBoardContent.setText("신고하였습니다");
 
                 });
+
+                //신고한 사람목록에 내가 들어가 있으면 해당 글 안보이도록
+                if(item.getWhoReport().contains(item.getUid())){
+                    binding.tvBoardNickName.setText("");
+                    binding.tvBoardContent.setText("신고하였습니다");
+                }
+
             } else if (holder instanceof ReReplyItemViewHolder) {
                 ItemBoardDetailRereplyBinding binding = ((ReReplyItemViewHolder) holder).binding;
 
